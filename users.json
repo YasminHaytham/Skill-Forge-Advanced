@@ -1,0 +1,38 @@
+{
+    "Instructors": [{
+        "CreatedCourses": [
+            "C7650",
+            "C3349",
+            "C5885"
+        ],
+        "role": "Instructor",
+        "userId": "2940",
+        "email": "yasmin@gmail.com",
+        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+        "username": "yasmin"
+    }],
+    "Students": [{
+        "Progress": [
+            {
+                "courseId": "C7650",
+                "lessonIds": [
+                    "L6729",
+                    "L9698"
+                ]
+            },
+            {
+                "courseId": "C3349",
+                "lessonIds": []
+            }
+        ],
+        "role": "Student",
+        "userId": "4222",
+        "EnrolledCourses": [
+            "C7650",
+            "C3349"
+        ],
+        "email": "yasmin2@gmail.com",
+        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+        "username": "yazo"
+    }]
+}
