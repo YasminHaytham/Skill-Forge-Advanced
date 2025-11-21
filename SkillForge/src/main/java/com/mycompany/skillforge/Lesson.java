@@ -12,17 +12,20 @@ public class Lesson {
     private String title;
     private String content;
     private List<String> OpResources;
+    private Quiz quiz;
+    
 
     public Lesson() {
         this.OpResources = new ArrayList<>();
     }
 
-    public Lesson(String lessonId, String title, String content, String courseId) {
+    public Lesson(String lessonId, String title, String content, String courseId ,Quiz quiz) {
         this();
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
         this.courseId = courseId;
+        this.quiz = quiz;
     }
 
     public String getLessonId() {
@@ -44,7 +47,9 @@ public class Lesson {
     public String getContent() {
         return content;
     }
-
+    public Quiz getQuiz() {
+        return quiz;
+    }
     public void setContent(String content) {
         this.content = content;
     }
@@ -58,7 +63,9 @@ public class Lesson {
     public List<String> getResources() {
         return OpResources;
     }
-
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
     public void setResource(List<String> resource) {
         this.OpResources = resource;
     }

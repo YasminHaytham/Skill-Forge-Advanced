@@ -109,7 +109,7 @@ public class Course {
 
     public void createLesson(String title, String content) {
         String lessonId = "L" + String.format("%04d", random.nextInt(10000));
-        Lesson lesson = new Lesson(lessonId, title, content, this.courseId);
+        Lesson lesson = new Lesson(lessonId, title, content, this.courseId, null);
         lessons.add(lesson);
         dbManager.updateCourse(this);
     }

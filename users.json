@@ -11,28 +11,51 @@
         "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
         "username": "yasmin"
     }],
-    "Students": [{
-        "Progress": [
-            {
-                "courseId": "C7650",
-                "lessonIds": [
-                    "L6729",
-                    "L9698"
-                ]
-            },
-            {
-                "courseId": "C3349",
-                "lessonIds": []
-            }
-        ],
-        "role": "Student",
-        "userId": "4222",
-        "EnrolledCourses": [
-            "C7650",
-            "C3349"
-        ],
-        "email": "yasmin2@gmail.com",
-        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-        "username": "yazo"
-    }]
+    "Students": [
+        {
+            "Progress": [
+                {
+                    "courseId": "C7650",
+                    "lessonIds": [
+                        "L6729",
+                        "L9698"
+                    ]
+                },
+                {
+                    "courseId": "C3349",
+                    "lessonIds": []
+                }
+            ],
+            "role": "Student",
+            "userId": "4222",
+            "EnrolledCourses": [
+                "C7650",
+                "C3349"
+            ],
+            "email": "yasmin2@gmail.com",
+            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+            "username": "yazo"
+        },
+        {
+            "Progress": [
+                {
+                    "courseId": "C5885",
+                    "lessonIds": ["L7171"]
+                },
+                {
+                    "courseId": "C7650",
+                    "lessonIds": []
+                }
+            ],
+            "role": "Student",
+            "userId": "3026",
+            "EnrolledCourses": [
+                "C5885",
+                "C7650"
+            ],
+            "email": "f@gmail.com",
+            "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+            "username": "farah"
+        }
+    ]
 }

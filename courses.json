@@ -1,6 +1,9 @@
 {"Courses": [
     {
-        "StudentIDs": ["4222"],
+        "StudentIDs": [
+            "4222",
+            "3026"
+        ],
         "description": "advandced math",
         "title": "math",
         "courseId": "C7650",
@@ -37,7 +40,7 @@
         }]
     },
     {
-        "StudentIDs": [],
+        "StudentIDs": ["3026"],
         "description": "masr",
         "title": "history",
         "courseId": "C5885",
