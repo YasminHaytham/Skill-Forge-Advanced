@@ -3,10 +3,12 @@ package com.mycompany.skillforge;
 public class LessonQuiz {
     private String lessonId;
     private Quiz quiz;
+    private boolean Completed;
 
     public LessonQuiz(String lessonId) {
         this.lessonId = lessonId;
         this.quiz = null;
+        this.Completed=false;
     }
 
     public String getLessonId() {
@@ -17,13 +19,14 @@ public class LessonQuiz {
         return quiz;
     }
 
-    public boolean PassedQuiz()
+    public void setCompleted()
     {
-        if (quiz.isPassed())
-        {
-            return true;
-        }
-        return false;
+        this.Completed=true;
+    }
+
+    public boolean isCompleted()
+    {
+        return Completed;
     }
     
 
