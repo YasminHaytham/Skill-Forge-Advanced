@@ -15,6 +15,7 @@ public class Course {
     private String instructorId;
     private List<Lesson> lessons;
     private List<String> studentIDs;
+    private String status;
     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
     private Random random = new Random();
 
@@ -25,6 +26,7 @@ public class Course {
         this.instructorId = instructorId;
         this.lessons = new ArrayList<>();
         this.studentIDs = new ArrayList<>();
+        this.status = "Pending";
     }
 
     public String getCourseId() {
@@ -73,6 +75,17 @@ public class Course {
 
     public void setStudentIDs(List<String> studentIDs) {
         this.studentIDs = studentIDs;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void ApproveCourse() {
+        this.status = "Approved";
+    }
+
+    public void DeclineCourse() {
+        this.status = "Declined";
     }
     public List <Student> getStudentsObjects() {
         List<Student> students = new ArrayList<>();
