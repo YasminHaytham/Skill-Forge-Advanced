@@ -22,14 +22,14 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     public StudentDashboardFrame() {
         Student = (Student) Manager.getCurrentUser();
-        availableCourses = new JsonDatabaseManager().getAllCourses();
+        availableCourses = new JsonDatabaseManager().getAllApprovedCourses();
         enrolledCourses = Student.getEnrolledCourseObjects();
         CompletedLessons = Student.getCompletedLessons();
         initComponents();
         LoadEnrolledCoursesTolist();
         LoadAvailableCoursesToList();
         LessonList.setVisible(false);
-        CompleteBtn.setVisible(false);
+        LessonFrameBtn.setVisible(false);
     }
 
     private void initializeListModels() {
@@ -66,40 +66,28 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         LessonList = new javax.swing.JList<>();
         ViewLessonsBtn = new javax.swing.JButton();
-        CompleteBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
-        initializeListModels();
+        LessonFrameBtn = new javax.swing.JButton();
+        GenerateCertificateBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText(Student.getUsername());
+        jLabel1.setText("jLabel1");
 
-        jLabel2.setText(Student.getUserId());
+        jLabel2.setText("jLabel2");
 
         EnrolledCoursesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         EnrolledCoursesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(EnrolledCoursesList);
 
         AvailableCoursesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         AvailableCoursesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(AvailableCoursesList);
@@ -132,15 +120,9 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         jLabel5.setText("Lessons");
 
         LessonList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         LessonList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(LessonList);
@@ -152,13 +134,6 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             }
         });
 
-        CompleteBtn.setText("Completed");
-        CompleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CompleteBtnActionPerformed(evt);
-            }
-        });
-
         LogOutBtn.setText("Log out");
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,86 +141,104 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        LessonFrameBtn.setText("Start Lesson");
+        LessonFrameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LessonFrameBtnActionPerformed(evt);
+            }
+        });
+
+        GenerateCertificateBtn.setText("Generate Certificate ");
+        GenerateCertificateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerateCertificateBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(UnenrollBtn)
-                                                                        .addComponent(ViewLessonsBtn)))
-                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(60, 60, 60)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(LogOutBtn)
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                .addComponent(EnrollBtn)
-                                                                                .addComponent(BrowseBtn)))))
-                                                .addGap(58, 58, 58))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(CompleteBtn)))
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(UnenrollBtn)
+                                    .addComponent(ViewLessonsBtn)))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(LogOutBtn)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(EnrollBtn)
+                                        .addComponent(BrowseBtn)))))
+                        .addGap(58, 58, 58))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LessonFrameBtn)
+                                    .addComponent(GenerateCertificateBtn))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(EnrollBtn)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(BrowseBtn))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel2)
-                                                .addGap(20, 20, 20)
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(UnenrollBtn)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(ViewLessonsBtn)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(EnrollBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(CompleteBtn)
-                                                .addGap(62, 62, 62)
-                                                .addComponent(LogOutBtn)))
-                                .addContainerGap(48, Short.MAX_VALUE))
+                                .addComponent(BrowseBtn))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(UnenrollBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ViewLessonsBtn)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LessonFrameBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(GenerateCertificateBtn)
+                        .addGap(27, 27, 27)
+                        .addComponent(LogOutBtn)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,7 +262,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                 LessonList.setVisible(false);
                 DefaultListModel<String> emptyModel = new DefaultListModel<>();
                 LessonList.setModel(emptyModel);
-                CompleteBtn.setVisible(false);
+                LessonFrameBtn.setVisible(false);
                 JOptionPane.showMessageDialog(this, "Successfully unenrolled from course!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 
 
@@ -277,7 +270,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a course to unenroll.");
             }
         }
-    }//GEN-LAST:event_UnenrollBtnActionPerformed
+    }                                           
 
     private void EnrollBtnActionPerformed(java.awt.event.ActionEvent evt) {
         int confirm = JOptionPane.showConfirmDialog(this,
@@ -300,7 +293,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
             }
         }
-    }//GEN-LAST:event_EnrollBtnActionPerformed
+    }                                         
 
     private void BrowseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseBtnActionPerformed
         BrowseFrame browseFrame = new BrowseFrame();
@@ -308,20 +301,22 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BrowseBtnActionPerformed
 
-    private void CompleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteBtnActionPerformed
+    private void LessonFrameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LessonFrameBtnActionPerformed
         int selected = LessonList.getSelectedIndex();
         if (selected != -1) {
             Lesson selectedLesson = Student.getEnrolledCourseObjects().get(EnrolledCoursesList.getSelectedIndex()).getLessons().get(selected);
-            selectedLesson.markAsCompleted(Student);
-            CompletedLessons = Student.getCompletedLessons();
-            ViewLessonsBtnActionPerformed(evt);
-            JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
+            LessonFrame lessonFrame = new LessonFrame(selectedLesson);
+            lessonFrame.setVisible(true);
+            this.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a lesson to mark as completed.");
+            JOptionPane.showMessageDialog(this, "Please select a lesson to start.");
         }
+    }//GEN-LAST:event_LessonFrameBtnActionPerformed
 
-    }
-//GEN-LAST:event_CompleteBtnActionPerformed
+    private void GenerateCertificateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateCertificateBtnActionPerformed
+   this.dispose();
+// Call Certificate Frame
+    }//GEN-LAST:event_GenerateCertificateBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {
         int confirm = JOptionPane.showConfirmDialog(this,
@@ -335,7 +330,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             Login loginFrame = new Login();
             loginFrame.setVisible(true);
         }
-    }//GEN-LAST:event_LogOutBtnActionPerformed
+    }                                         
 
     private void ViewLessonsBtnActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -360,7 +355,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
             LessonList.setModel(model);
             LessonList.setVisible(true);
-            CompleteBtn.setVisible(true);
+            LessonFrameBtn.setVisible(true);
 
               LessonList.revalidate();
         LessonList.repaint();
@@ -385,6 +380,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void LoadAvailableCoursesToList() {
         DefaultListModel<String> model = new DefaultListModel<>();
+        // if condition to check only for approved courses
         for (Course course : availableCourses) {
             if (!course.isStudentEnrolled(Student)) {
                 model.addElement(course.getTitle());
@@ -432,9 +428,10 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> AvailableCoursesList;
     private javax.swing.JButton BrowseBtn;
-    private javax.swing.JButton CompleteBtn;
     private javax.swing.JButton EnrollBtn;
     private javax.swing.JList<String> EnrolledCoursesList;
+    private javax.swing.JButton GenerateCertificateBtn;
+    private javax.swing.JButton LessonFrameBtn;
     private javax.swing.JList<String> LessonList;
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JButton UnenrollBtn;

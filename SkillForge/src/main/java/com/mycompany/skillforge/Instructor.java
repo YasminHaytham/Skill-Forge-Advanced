@@ -50,6 +50,7 @@ public List<Course> getCreatedCourseObjects() {
 }
 
 
+
 public static Instructor fromJsonObject(JSONObject jsonObject) {
     String userId = jsonObject.getString("userId");
     String role = jsonObject.getString("role");
@@ -75,5 +76,9 @@ public JSONObject toJsonObject() {
     }
     jsonObject.put("CreatedCourses", coursesArray);
     return jsonObject;
+}
+public void CompleteCourse(Course course) {
+    course.setCompleted(true);
+    dbManager.updateCourse(course);
 }
 }

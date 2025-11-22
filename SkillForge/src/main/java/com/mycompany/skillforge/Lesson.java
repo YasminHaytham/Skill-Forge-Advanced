@@ -2,6 +2,7 @@ package com.mycompany.skillforge;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.json.JSONObject;
 
@@ -12,12 +13,15 @@ public class Lesson {
     private String title;
     private String content;
     private List<String> OpResources;
+    private List<Question> questions;
+    private Random random = new Random();
 
     public Lesson() {
         this.OpResources = new ArrayList<>();
+        this.questions = new ArrayList<>();
     }
 
-    public Lesson(String lessonId, String title, String content, String courseId) {
+    public Lesson(String lessonId, String title, String content, String courseId, Quiz quiz) {
         this();
         this.lessonId = lessonId;
         this.title = title;
@@ -48,12 +52,47 @@ public class Lesson {
     public void setContent(String content) {
         this.content = content;
     }
+
     public String getCourseId() {
         return courseId;
     }
+
     public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
+
+    public void createQuestion(Question question) {
+        this.questions.add(question);
+    }
+
+    public void setQuestions ( List <Question> questions)
+    {
+        this.questions=questions;
+    }
+
+    public List<Question> getQuestions()
+    {
+        return this.questions;
+    }
+
+    public Quiz GenerateQuiz(Student student) {
+        for (Progress p : student.getProgress()) {
+            if (p.getCourseId().equals(this.courseId)) {
+                for (LessonQuiz lq : p.getLessonQuizs()) {
+                    if (lq.getLessonId().equals(this.lessonId)) {
+                        return lq.getQuiz();
+                    }
+                }
+            }
+        }
+
+        String quizId = String.format("%03d", random.nextInt(10000)) + this.lessonId + "_quiz";
+        Quiz newQuiz = new Quiz(quizId, this.questions);
+        student.addLessonQuiz(this.courseId, this.lessonId,newQuiz);
+        return newQuiz;
+
+    }
+
 
     public List<String> getResources() {
         return OpResources;
@@ -63,7 +102,7 @@ public class Lesson {
         this.OpResources = resource;
     }
 
-    public void markAsCompleted( Student student) {
+    public void markAsCompleted(Student student) {
         student.addCompletedLesson(this);
     }
 
@@ -92,6 +131,5 @@ public class Lesson {
         lesson.OpResources = resources;
         return lesson;
     }
-
 
 }
