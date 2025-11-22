@@ -88,10 +88,11 @@ public class Lesson {
 
         String quizId = String.format("%03d", random.nextInt(10000)) + this.lessonId + "_quiz";
         Quiz newQuiz = new Quiz(quizId, this.questions);
-        //add quiz in student
+        student.addLessonQuiz(this.courseId, this.lessonId,newQuiz);
         return newQuiz;
 
     }
+
 
     public List<String> getResources() {
         return OpResources;
