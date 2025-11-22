@@ -27,7 +27,7 @@ public void setCreatedCourses(List<String> createdCourses) {
 
 public void createCourse( String title, String description) {
     String courseId = "C" + String.format("%04d", random.nextInt(10000));
-    Course course = new Course(courseId, title, description, this.getUserId());
+    Course course = new Course(courseId, title, description, this.getUserId(), false);
     try {
         dbManager.addCourse(course);
          CreatedCourses.add(courseId);
@@ -136,6 +136,10 @@ public Map<String, Object> getCourseAnalytics(String courseId) {
 
     public String getCourseApprovalStatus(String courseId) {
         Course course = dbManager.getCourseById(courseId);
-        return course != null ? course.getApprovalStatus() : "NOT_FOUND";
+        return course != null ? course.getstatus() : "NOT_FOUND";
     }
+public void CompleteCourse(Course course) {
+    course.setCompleted(true);
+    dbManager.updateCourse(course);
+}
 }

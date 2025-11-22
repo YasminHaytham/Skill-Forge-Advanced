@@ -15,9 +15,10 @@ public class Quiz {
     private int studentAttempts;
     boolean passed;
 
-    public Quiz(String QuizId) {
-        this. QuizId = QuizId;
-        this.questions = new ArrayList<>();
+    public Quiz(String QuizId, List<Question> questions) {
+        this.QuizId = QuizId;
+        this.questions = questions;
+        this.score = 0;
         this.studentAttempts = 0;
         this.passed = false;
     }
@@ -39,10 +40,6 @@ public class Quiz {
         return MaxNumberofAttempts; 
     }
     
-    public boolean isPassed() { 
-        return passed; 
-    }
-    
     public void setQuizId(String quizId) { 
         this.QuizId = quizId; 
     }
@@ -57,9 +54,10 @@ public class Quiz {
             return false; 
         }
         
-        if (!question.isValid()) {
+     /*   if (!question.isValid()) {
             return false; 
         }
+            */ 
         
         questions.add(question);
         return true;
@@ -75,20 +73,48 @@ public class Quiz {
     }
 
    
-    public boolean updateQuestion(int index, Question newQuestion) {
+   /*  public boolean updateQuestion(int index, Question newQuestion) {
         if (index >= 0 && index < questions.size() && newQuestion.isValid()) {
             questions.set(index, newQuestion);
             return true;
         }
         return false;
     }
-
+*/
     
     public void clearQuestions() {
         questions.clear();
     }
 
-   public void calculatePassStatus() {
+    public List<Question> getAllQuestions() {
+        return questions;
+    }
+
+    public void setAllQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public int getMaxNumberofAttempts() {
+        return MaxNumberofAttempts;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public List<Integer> getStudentScores() {
+        return studentScores;
+    }
+
+    public void setStudentScores(List<Integer> studentScores) {
+        this.studentScores = studentScores;
+    }
+
+    public void addStudentScore(int score) {
+        this.studentScores.add(score);
+    }
+
+    public void calculatePassStatus() {
         double passingScore = Math.ceil(questions.size() / 2.0);
         if (this.passed) {
             return;
@@ -119,7 +145,7 @@ public class Quiz {
     }
 
     // Validate that quiz has exactly 5 questions with 4 options each
-    public boolean isValid() {
+   /* public boolean isValid() {
         if (questions == null || questions.size() != 5) {
             return false;
         }
@@ -152,7 +178,7 @@ public class Quiz {
         return "Valid - 5 questions with 4 options each";
     }
 
- 
+ */
     public int getQuestionCount() {
         return questions != null ? questions.size() : 0;
     }
@@ -171,4 +197,9 @@ public class Quiz {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public boolean isPassed() {
+        return passed;
+    }
+
 }
