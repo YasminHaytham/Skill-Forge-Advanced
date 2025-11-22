@@ -22,7 +22,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     public StudentDashboardFrame() {
         Student = (Student) Manager.getCurrentUser();
-        availableCourses = new JsonDatabaseManager().getAllCourses();
+        availableCourses = new JsonDatabaseManager().getAllApprovedCourses();
         enrolledCourses = Student.getEnrolledCourseObjects();
         CompletedLessons = Student.getCompletedLessons();
         initComponents();
