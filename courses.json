@@ -1,6 +1,10 @@
 {"Courses": [
     {
-        "StudentIDs": ["4222"],
+        "approvalStatus": "APPROVED",
+        "StudentIDs": [
+            "4222",
+            "5623"
+        ],
         "description": "advandced math",
         "title": "math",
         "courseId": "C7650",
@@ -23,6 +27,7 @@
         ]
     },
     {
+        "approvalStatus": "PENDING",
         "StudentIDs": ["4222"],
         "description": "fluid",
         "title": "phy2",
@@ -37,6 +42,7 @@
         }]
     },
     {
+        "approvalStatus": "PENDING",
         "StudentIDs": [],
         "description": "masr",
         "title": "history",
@@ -48,6 +54,21 @@
             "title": "lesson 1",
             "courseId": "C5885",
             "content": "egypty"
+        }]
+    },
+    {
+        "approvalStatus": "APPROVED",
+        "StudentIDs": [],
+        "description": "sddddd",
+        "title": "ss",
+        "courseId": "C7034",
+        "instructorId": "8105",
+        "lessons": [{
+            "OpResources": [],
+            "lessonId": "L7317",
+            "title": "ddf",
+            "courseId": "C7034",
+            "content": "ssa"
         }]
     }
 ]}

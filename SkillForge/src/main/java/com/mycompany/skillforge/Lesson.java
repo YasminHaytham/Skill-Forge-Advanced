@@ -1,5 +1,5 @@
 package com.mycompany.skillforge;
-
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +12,7 @@ public class Lesson {
     private String title;
     private String content;
     private List<String> OpResources;
+    private Quiz quiz;
 
     public Lesson() {
         this.OpResources = new ArrayList<>();
@@ -92,6 +93,42 @@ public class Lesson {
         lesson.OpResources = resources;
         return lesson;
     }
+public void createQuiz() {
+        String quizId = "Q" + this.lessonId.substring(1);
+        this.quiz = new Quiz(quizId);
+    }
+    public boolean addQuestionToQuiz(String questionText, List<String> options, String correctAnswer) {
+        if (this.quiz == null) {
+            return false; 
+        }
+        
+        Random random;
+        random = new Random();
+        String questionId = "QU" + System.currentTimeMillis() + random.nextInt(1000);
+        Question question = new Question(questionId, questionText, options, correctAnswer, 1);
+        this.quiz.addQuestion(question);
+        return true;
+    }
+    public String getQuizStatus() {
+        if (quiz == null) {
+            return "No Quiz";
+        } else if (quiz.isValid()) {
+            return "Complete (" + quiz.getQuestions().size() + "/5 questions)";
+        } else {
+            return "Incomplete (" + quiz.getQuestions().size() + "/5 questions)";
+        }
+    }
 
+    // NEW: Check if quiz can be saved (has 5 questions)
+    public boolean canSaveQuiz() {
+        return quiz != null && quiz.isValid();
+    }
 
+    public void setQuiz(Quiz quiz) { 
+        this.quiz = quiz;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
 }
