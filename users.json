@@ -34,5 +34,12 @@
         "email": "yasmin2@gmail.com",
         "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
         "username": "yazo"
+    }],
+    "Admins":[{
+        "username":"",
+        "email":"",
+        "passwordHash":"",
+        "role":"Admin",
+        "userId":"1234"
     }]
 }
