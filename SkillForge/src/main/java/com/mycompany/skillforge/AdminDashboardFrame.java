@@ -128,6 +128,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
             Course c = dbManager.getCourseById(courseId);
             c.Approve();
             model.setValueAt(c.getStatus(), row, 4);
+            dbManager.updateCourse(c);
         } else {
             JOptionPane.showMessageDialog(this, "Select a course first!");
         }
@@ -140,6 +141,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
             Course c = dbManager.getCourseById(courseId);
             c.Decline();
             model.setValueAt(c.getStatus(), row, 4);
+            dbManager.updateCourse(c);
         } else {
             JOptionPane.showMessageDialog(this, "Select a course first!");
         }
@@ -156,6 +158,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
                 c.Approve();
             }
             model.setValueAt(c.getStatus(), row, 4);
+            dbManager.updateCourse(c);
         } else {
             JOptionPane.showMessageDialog(this, "Select a course first!");
         }

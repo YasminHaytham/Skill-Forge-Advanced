@@ -14,11 +14,11 @@ public class Admin extends User {
         course.Declined();
     }
     
-    public void toggleStatus() {
-        if ("Approved".equals(this.status)) {
-            this.status = "Declined";
+    public void toggleStatus( Course course) {
+        if (course.isApproved()) {
+            course.Decline();
         } else {
-            this.status = "Approved";
+           course.Approve();
         }
     }
 
