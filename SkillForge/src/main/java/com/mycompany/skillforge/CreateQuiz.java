@@ -647,6 +647,7 @@ public class CreateQuiz extends javax.swing.JFrame {
         options.add(option2.trim());
         options.add(option3.trim());
         options.add(option4.trim());
+        String[] optionsArray = options.toArray(new String[0]);
         
         // Get the correct answer text based on the number
         String correctAnswerText;
@@ -657,12 +658,10 @@ public class CreateQuiz extends javax.swing.JFrame {
             case "4": correctAnswerText = option4.trim(); break;
             default: correctAnswerText = option1.trim(); // Should not happen due to validation
         }
-        
-        // Create question ID
-        String questionId = "QU" + System.currentTimeMillis() + random.nextInt(1000) + questionNumber;
+         
         
         // Create question (1 point per question)
-        Question question = new Question(questionId, questionText.trim(), options, correctAnswerText, 1);
+        Question question = new Question(questionText.trim(), optionsArray, correctAnswerText);
         
         // Add question to quiz
         boolean success = quiz.addQuestion(question);
