@@ -18,7 +18,7 @@ public class QuizFrame extends javax.swing.JFrame {
     Student student;
     public QuizFrame(Lesson lesson) {
         this.lesson = lesson;
-        this.quiz = lesson.getQuiz();
+        this.quiz = lesson.GenerateQuiz(student);
         student =(Student) Manager.getCurrentUser();
         initComponents();
         YourAnswer1.setVisible(false);

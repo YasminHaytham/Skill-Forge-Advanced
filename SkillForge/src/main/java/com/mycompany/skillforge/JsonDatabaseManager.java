@@ -38,8 +38,59 @@ public class JsonDatabaseManager {
         }
         return instructors;
     }
+     public List<Admin> getAllAdmins() {
+        JSONObject data = readFromFile(userFile);
+        JSONArray adminsArray = data.getJSONArray("Admins");
+        List<Admin> Admins = new ArrayList<>();
+        for (int i = 0; i < adminsArray.length(); i++) {
+            JSONObject adminJson = adminsArray.getJSONObject(i);
+            Admin admin = Admin.fromJsonObject(adminJson);
+            Admins.add(admin);
+        }
+        return Admins;
+    }
 
-    public List<Course> getAllCourses() {
+    public List<Course> getAllDeclinedCourses() {
+        JSONObject data = readFromFile(courseFile);
+        JSONArray coursesArray = data.getJSONArray("Courses");
+        List<Course> courses = new ArrayList<>();
+        for (int i = 0; i < coursesArray.length(); i++) {
+            JSONObject courseJson = coursesArray.getJSONObject(i);
+            Course course = Course.fromJsonObject(courseJson);
+            if (course.isDeclined()) {
+            courses.add(course);
+            }
+        }
+        return courses;
+    }
+
+    public List<Course> getAllApprovedCourses() {
+        JSONObject data = readFromFile(courseFile);
+        JSONArray coursesArray = data.getJSONArray("Courses");
+        List<Course> courses = new ArrayList<>();
+        for (int i = 0; i < coursesArray.length(); i++) {
+            JSONObject courseJson = coursesArray.getJSONObject(i);
+            Course course = Course.fromJsonObject(courseJson);
+            if (course.isApproved()) {
+            courses.add(course);
+            }
+        }
+        return courses;
+    }
+      public List<Course> getAllPendingCourses() {
+        JSONObject data = readFromFile(courseFile);
+        JSONArray coursesArray = data.getJSONArray("Courses");
+        List<Course> courses = new ArrayList<>();
+        for (int i = 0; i < coursesArray.length(); i++) {
+            JSONObject courseJson = coursesArray.getJSONObject(i);
+            Course course = Course.fromJsonObject(courseJson);
+            if (course.isPending()) {
+            courses.add(course);
+            }
+        }
+        return courses;
+    }
+     public List<Course> getAllCourses() {
         JSONObject data = readFromFile(courseFile);
         JSONArray coursesArray = data.getJSONArray("Courses");
         List<Course> courses = new ArrayList<>();

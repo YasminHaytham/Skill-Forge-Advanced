@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class LessonFrame extends javax.swing.JFrame {
     Lesson lesson;
+    Student student;
 
     public LessonFrame(Lesson lesson) {
 
@@ -19,6 +20,7 @@ public class LessonFrame extends javax.swing.JFrame {
             throw new IllegalArgumentException("Lesson cannot be null");
         }
         this.lesson = lesson;
+        student =(Student) Manager.getCurrentUser();
         initComponents();
     }
 
@@ -134,11 +136,12 @@ public class LessonFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuizBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_QuizBtnActionPerformed
-        if (lesson.getQuiz() == null) {
+        if (lesson.getQuestions().size()==0) {
             JOptionPane.showMessageDialog(this, "No quiz available for this lesson.");
             return;
         }
-        if(this.lesson.getQuiz().getStudentAttempts() >= this.lesson.getQuiz().getMaxNumberofAttempts()){
+        Quiz q= this.lesson.GenerateQuiz(student);
+        if(q.getStudentAttempts() >=q.getMaxNumberofAttempts()){
             JOptionPane.showMessageDialog(this, "You have reached the maximum number of attempts for this quiz.");
             return;
         }

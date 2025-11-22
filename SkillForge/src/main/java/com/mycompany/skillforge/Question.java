@@ -39,7 +39,6 @@ public String getOptionAt(int index) {
     }
     return null;
 }
-}
 
  public static Question fromJsonObject(JSONObject jsonObject)
  {
@@ -69,5 +68,5 @@ public String getOptionAt(int index) {
         jsonObject.put("correctAnswer", this.correctAnswer);
         return jsonObject;
  }
-
 }
+
