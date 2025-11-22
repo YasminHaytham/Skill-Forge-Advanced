@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class Manager {
 
     private static User loggedInUser = null;
-    private  static JsonDatabaseManager dbManager = new JsonDatabaseManager();
+    private static JsonDatabaseManager dbManager = new JsonDatabaseManager();
 
     public static String signup(String username, String email, String password, String role) {
 
@@ -27,7 +27,6 @@ public class Manager {
             String userId = String.valueOf(1000 + rand.nextInt(9000));
             String hashed = Password.hashPassword(password);
 
-            
             if (role.equalsIgnoreCase("student")) {
                 Student newUser = new Student(userId, "Student", username, email, hashed);
                 try {
@@ -57,7 +56,7 @@ public class Manager {
         try {
             if (role.equalsIgnoreCase("student")) {
                 for (Student s : dbManager.getAllStudents()) {
-                    if ((s.getEmail().equalsIgnoreCase(userInput) || s.getUsername().equalsIgnoreCase(userInput))&& s.getPasswordHash().equals(hashed)) {
+                    if ((s.getEmail().equalsIgnoreCase(userInput) || s.getUsername().equalsIgnoreCase(userInput)) && s.getPasswordHash().equals(hashed)) {
                         loggedInUser = s;
                         return "Login successful";
                     }
@@ -70,6 +69,15 @@ public class Manager {
                         return "Login successful";
                     }
                 }
+            } else if (role.equalsIgnoreCase("admin")) {   
+                for (Admin a : dbManager.getAllAdmins()) {
+                    if ((a.getEmail().equalsIgnoreCase(userInput)
+                            || a.getUsername().equalsIgnoreCase(userInput))
+                            && a.getPasswordHash().equals(hashed)) {
+                        loggedInUser = a;
+                        return "Login successful";
+                    }
+                }
             }
 
             return "Invalid email or password or role";
@@ -79,12 +87,12 @@ public class Manager {
             return "Database error!";
         }
     }
-    
+
     public static void logout() {
         loggedInUser = null;
     }
 
-     public static User getCurrentUser() {
+    public static User getCurrentUser() {
         return loggedInUser;
     }
 
