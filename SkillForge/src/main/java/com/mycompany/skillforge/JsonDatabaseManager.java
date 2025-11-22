@@ -38,7 +38,7 @@ public class JsonDatabaseManager {
         }
         return instructors;
     }
-     public List<Admin> getAllAdmins() {
+   /* public List<Admin> getAllAdmins() {
         JSONObject data = readFromFile(userFile);
         JSONArray adminsArray = data.getJSONArray("Admins");
         List<Admin> Admins = new ArrayList<>();
@@ -48,7 +48,7 @@ public class JsonDatabaseManager {
             Admins.add(admin);
         }
         return Admins;
-    }
+    } */ 
 
     public List<Course> getAllDeclinedCourses() {
         JSONObject data = readFromFile(courseFile);
