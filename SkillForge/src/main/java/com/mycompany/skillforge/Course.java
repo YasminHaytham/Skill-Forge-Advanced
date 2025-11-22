@@ -27,8 +27,29 @@ public class Course {
         this.instructorId = instructorId;
         this.lessons = new ArrayList<>();
         this.studentIDs = new ArrayList<>();
+        this.status = "PENDING";
+    }
+
+    public String getstatus() {
+        return status;
+    }
+
+    public void setApprovalStatus(String approvalStatus) {
+        this.status = approvalStatus;
+    }
+
+    public boolean isApproved() {
+        return "APPROVED".equals(status);
+    }
+
+    public boolean isPending() {
+        return "PENDING".equals(status);
+    }
+
+    public boolean isRejected() {
         this.isCompleted = false;
         this.status = "Pending";
+        return "REJECTED".equals(status);
     }
 
     public Course(String courseId, String title, String description, String instructorId, List<Lesson> lessons,
@@ -112,14 +133,6 @@ public class Course {
         dbManager.updateCourse(this);
     }
 
-    public boolean isApproved() {
-        return "Approved".equals(this.status);
-    }
-
-    public boolean isPending() {
-        return "Pending".equals(this.status);
-    }
-
     public boolean isDeclined() {
         return "Declined".equals(this.status);
     }
@@ -142,16 +155,24 @@ public class Course {
     }
 // Methods to manage students
 // adding and removing students from the course
+    // Methods to manage students
+    // adding and removing students from the course
 
     public boolean isStudentEnrolled(Student student) {
         return studentIDs.contains(student.getUserId());
     }
 
     public void enrollStudent(Student student) {
-        studentIDs.add(student.getUserId());
-        student.addEnrolledCourse(this.courseId);
-        dbManager.updateStudent(student);
-        dbManager.updateCourse(this);
+        if (!"APPROVED".equals(status)) {
+            throw new IllegalArgumentException("Cannot enroll in a course that is not approved");
+        }
+
+        if (!isStudentEnrolled(student)) {
+            studentIDs.add(student.getUserId());
+            student.addEnrolledCourse(this.courseId);
+            dbManager.updateStudent(student);
+            dbManager.updateCourse(this);
+        }
     }
 
     public void unenrollStudent(Student student) {
@@ -240,4 +261,32 @@ public class Course {
         return jsonObject;
     }
 
+    public boolean hasStudentCompletedCourse(String studentId) {
+        Student student = dbManager.getStudentById(studentId);
+        if (student == null)
+            return false;
+
+        // Check if student passed all lesson quizzes
+        for (Lesson lesson : lessons) {
+            QuizResult result = student.getQuizResult(courseId, lesson.getLessonId());
+            if (result == null || !result.isPassed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public double getCompletionPercentage() {
+        if (studentIDs.isEmpty())
+            return 0.0;
+
+        int completedCount = 0;
+        for (String studentId : studentIDs) {
+            if (hasStudentCompletedCourse(studentId)) {
+                completedCount++;
+            }
+        }
+
+        return (double) completedCount / studentIDs.size() * 100;
+    }
 }

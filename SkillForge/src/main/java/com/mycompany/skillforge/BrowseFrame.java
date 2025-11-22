@@ -236,6 +236,9 @@ public class BrowseFrame extends javax.swing.JFrame {
         }
          // if condition to check only for approved courses
         for (Course course : availableCourses) {
+            if (!course.isApproved()) {
+                continue;
+            }
             if (course.isStudentEnrolled(Student)) {
                 continue;
             }
