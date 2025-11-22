@@ -28,6 +28,7 @@ public class Course {
         this.lessons = new ArrayList<>();
         this.studentIDs = new ArrayList<>();
         this.isCompleted = false;
+        this.status="Pending";
     }
 
     public String getCourseId() {
@@ -85,12 +86,14 @@ public class Course {
     public String getStatus() {
         return status;
     }
-    public void ApproveCourse() {
+    public void Approve() {
         this.status = "Approved";
+        dbManager.updateCourse(this);
     }
 
-    public void DeclineCourse() {
+    public void Decline() {
         this.status = "Declined";
+        dbManager.updateCourse(this);
     }
     public List <Student> getStudentsObjects() {
         List<Student> students = new ArrayList<>();

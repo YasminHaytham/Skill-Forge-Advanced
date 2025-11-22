@@ -2,6 +2,7 @@ package com.mycompany.skillforge;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.json.JSONObject;
 
@@ -12,15 +13,15 @@ public class Lesson {
     private String title;
     private String content;
     private List<String> OpResources;
-    private List<Question> question;
-    
+    private List<Question> questions;
+    private Random random = new Random();
 
     public Lesson() {
         this.OpResources = new ArrayList<>();
         this.questions = new ArrayList<>();
     }
 
-    public Lesson(String lessonId, String title, String content, String courseId ,Quiz quiz) {
+    public Lesson(String lessonId, String title, String content, String courseId, Quiz quiz) {
         this();
         this.lessonId = lessonId;
         this.title = title;
@@ -47,9 +48,7 @@ public class Lesson {
     public String getContent() {
         return content;
     }
-    public Quiz getQuiz() {
-        return quiz;
-    }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -66,8 +65,18 @@ public class Lesson {
         this.questions.add(question);
     }
 
+    public void setQuestions ( List <Question> questions)
+    {
+        this.questions=questions;
+    }
+
+    public List<Question> getQuestions()
+    {
+        return this.questions;
+    }
+
     public Quiz GenerateQuiz(Student student) {
-    for (Progress p : student.getProgress()) {
+        for (Progress p : student.getProgress()) {
             if (p.getCourseId().equals(this.courseId)) {
                 for (LessonQuiz lq : p.getLessonQuizs()) {
                     if (lq.getLessonId().equals(this.lessonId)) {
@@ -77,19 +86,17 @@ public class Lesson {
             }
         }
 
-            String quizId = String.format("%03d", random.nextInt(10000)) + this.lessonId + "_quiz";
-            Quiz newQuiz = new Quiz(quizId, this.questions);
-            //add quiz in student
-            return newQuiz;
+        String quizId = String.format("%03d", random.nextInt(10000)) + this.lessonId + "_quiz";
+        Quiz newQuiz = new Quiz(quizId, this.questions);
+        //add quiz in student
+        return newQuiz;
 
-        }
+    }
 
     public List<String> getResources() {
         return OpResources;
     }
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
+
     public void setResource(List<String> resource) {
         this.OpResources = resource;
     }
