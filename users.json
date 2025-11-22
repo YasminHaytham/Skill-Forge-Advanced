@@ -60,7 +60,15 @@
             "passwordHash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
             "username": "ya"
         }
+    ],
+    "Admins":[
+        {
+            "role": "Admin",
+            "userId": "1234",
+            "email": "ad@gmail.com",
+            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+            "username": "Admin1234"
+        }
     ]
-
           }
    
