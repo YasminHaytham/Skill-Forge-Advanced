@@ -1,5 +1,7 @@
 package com.mycompany.skillforge;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,6 +13,9 @@ public Question(String questionText, String[] options, String correctAnswer) {
     this.questionText = questionText;
     this.options = options;
     this.correctAnswer = correctAnswer;
+}
+public Question(String questionId, String questionText2, List<String> options2, String correctAnswer2, int i) {
+    //TODO Auto-generated constructor stub
 }
 public boolean isCorrect(String selectedAnswer) {
     return selectedAnswer.equals(correctAnswer);

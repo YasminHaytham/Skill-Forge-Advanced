@@ -187,4 +187,13 @@ public class Student extends User {
 
         return jsonObject;
     }
+        public QuizResult getQuizResult(String courseId, String lessonId) {
+        // TODO: Implement actual quiz result retrieval
+        return null; // placeholder
+    }
+    
+    public boolean hasCompletedCourse(String courseId) {
+        // TODO: Implement course completion check
+        return false; // placeholder
+    }
 }
