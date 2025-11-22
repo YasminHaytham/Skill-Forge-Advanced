@@ -69,6 +69,9 @@ public class Course {
     }
 
     public void setCompleted(boolean isCompleted) {
+        if (isCompleted) {
+            return;
+        }
         this.isCompleted = isCompleted;
     }
 
@@ -146,6 +149,12 @@ public class Course {
         }
         return students;
     }
+
+    public void markAsCompleted() {
+        this.isCompleted = true;
+    }
+// Methods to manage students
+// adding and removing students from the course
     // Methods to manage students
     // adding and removing students from the course
 
@@ -226,8 +235,7 @@ public class Course {
             }
 
         }
-        Course course = new Course(courseId, title, description, instructorId, lessons, studentIDs, isCompleted,
-                status);
+        Course course = new Course(courseId, title, description, instructorId, lessons, studentIDs, isCompleted, status);
         return course;
     }
 
