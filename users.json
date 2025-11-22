@@ -34,10 +34,7 @@
             "Progress": [
                 {
                     "courseId": "C7650",
-                    "lessonIds": [
-                        "L6729",
-                        "L9698"
-                    ]
+                    "lessonIds": []
                 },
                 {
                     "courseId": "C3349",
@@ -55,13 +52,10 @@
             "username": "yazo"
         },
         {
-            "Progress": [{
-                "courseId": "C7650",
-                "lessonIds": []
-            }],
+            "Progress": [],
             "role": "Student",
             "userId": "5623",
-            "EnrolledCourses": ["C7650"],
+            "EnrolledCourses": [],
             "email": "q@gmail.com",
             "passwordHash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
             "username": "ya"

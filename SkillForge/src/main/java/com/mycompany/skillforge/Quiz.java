@@ -23,6 +23,14 @@ public class Quiz {
         this.passed = false;
     }
 
+    public Quiz(String quizId) {
+        this.questions = new ArrayList<>();
+        this.studentScores = new ArrayList<>();
+        this.studentAttempts = 0;
+        this.score = 0;
+        this.passed = false;
+    }
+
     // Getters and setters
     public String getQuizId() { 
         return QuizId; 

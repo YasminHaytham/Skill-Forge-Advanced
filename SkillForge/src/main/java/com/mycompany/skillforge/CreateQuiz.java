@@ -15,12 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class CreateQuiz extends javax.swing.JFrame {
     private Lesson lesson;  
+    private Student student;
     private JsonDatabaseManager dbManager = new JsonDatabaseManager();
+    private Instructor currentInstructor;
     private Random random = new Random();
     
-    // Constructor with Lesson parameter
+    
     public CreateQuiz(Lesson lesson) {
         this.lesson = lesson;
+        this.currentInstructor = (Instructor) Manager.getCurrentUser(); 
         initComponents();
         setTitle("Create Quiz for: " + lesson.getTitle());
         initializeQuizFields();
@@ -388,8 +391,7 @@ public class CreateQuiz extends javax.swing.JFrame {
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         try {
-            // Create a new Quiz object
-            String quizId = "Q" + lesson.getLessonId().substring(1);
+            String quizId = "QZ" + lesson.getLessonId().substring(1);
             Quiz quiz = new Quiz(quizId);
             
             // Add all 5 questions to the quiz
@@ -428,19 +430,10 @@ public class CreateQuiz extends javax.swing.JFrame {
                 return;
             }
             
-            // Validate quiz completeness
-            if (!quiz.isValid()) {
-                JOptionPane.showMessageDialog(this, 
-                    "Quiz validation failed: " + quiz.getValidationMessage(),
-                    "Quiz Incomplete", 
-                    JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        
             
-            // Save quiz to lesson
-            lesson.setQuiz(quiz);
-            
-            // Update database
+          
+
             Course course = dbManager.getCourseById(lesson.getCourseId());
             if (course != null) {
                 // Update the specific lesson in the course

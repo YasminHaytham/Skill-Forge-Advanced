@@ -131,4 +131,9 @@ public class Lesson {
         return lesson;
     }
 
+    public void setQuiz(Quiz quiz) {
+       
+        throw new UnsupportedOperationException("Unimplemented method 'setQuiz'");
+    }
+
 }

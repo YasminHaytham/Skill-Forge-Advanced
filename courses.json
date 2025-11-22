@@ -1,10 +1,7 @@
 {"Courses": [
     {
-        "approvalStatus": "APPROVED",
-        "StudentIDs": [
-            "4222",
-            "5623"
-        ],
+        "approvalStatus": "PENDING",
+        "StudentIDs": ["4222"],
         "description": "advandced math",
         "title": "math",
         "courseId": "C7650",
@@ -57,7 +54,7 @@
         }]
     },
     {
-        "approvalStatus": "APPROVED",
+        "approvalStatus": "PENDING",
         "StudentIDs": [],
         "description": "sddddd",
         "title": "ss",

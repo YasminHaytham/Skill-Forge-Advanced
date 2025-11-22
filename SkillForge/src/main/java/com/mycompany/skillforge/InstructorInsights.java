@@ -7,6 +7,12 @@ package com.mycompany.skillforge;
 import java.util.HashSet;
 import java.util.Map;
 import javax.swing.JTextArea;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 
 /**
  *
@@ -16,6 +22,9 @@ public class InstructorInsights extends javax.swing.JFrame {
 
     private Map<String, Object> analytics;
     private String courseTitle;
+    private JTabbedPane tabbedPane;
+    private JPanel chartPanel;
+    private JPanel textPanel;
     
     /**
      * Creates new form InstructorInsights with analytics data
@@ -24,17 +33,72 @@ public class InstructorInsights extends javax.swing.JFrame {
         this.analytics = analytics;
         this.courseTitle = courseTitle;
         initComponents();
+        createTabbedInterface();
         displayAnalytics();
+        displayCharts();
     }
     
     /**
      * Default constructor (keep for NetBeans compatibility)
      */
-    public InstructorInsights() {
+     public InstructorInsights() {
         initComponents();
+        createTabbedInterface();
+    }
+        private void createTabbedInterface() {
+        // Remove existing components
+        getContentPane().removeAll();
+        
+        // Create tabbed pane
+        tabbedPane = new JTabbedPane();
+        
+        // Create text analytics panel
+        textPanel = new JPanel(new BorderLayout());
+        textPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        analyticsTextArea = new javax.swing.JTextArea();
+        
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel1.setText("Course Analytics - " + courseTitle);
+        
+        analyticsTextArea.setEditable(false);
+        analyticsTextArea.setColumns(50);
+        analyticsTextArea.setLineWrap(true);
+        analyticsTextArea.setRows(20);
+        analyticsTextArea.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+        jScrollPane1.setViewportView(analyticsTextArea);
+        
+        textPanel.add(jLabel1, BorderLayout.NORTH);
+        textPanel.add(jScrollPane1, BorderLayout.CENTER);
+        
+        // Create charts panel
+        chartPanel = new JPanel(new BorderLayout());
+        chartPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        
+        // Add tabs
+        tabbedPane.addTab("Text Analytics", textPanel);
+        tabbedPane.addTab("Visual Charts", chartPanel);
+        
+        // Add close button
+        closeBtn = new javax.swing.JButton();
+        closeBtn.setText("Close");
+        closeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeBtnActionPerformed(evt);
+            }
+        });
+        
+        // Layout
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(tabbedPane, BorderLayout.CENTER);
+        getContentPane().add(closeBtn, BorderLayout.SOUTH);
+        
+        pack();
     }
     
-    private void displayAnalytics() {
+       private void displayAnalytics() {
         if (analytics == null) return;
         
         StringBuilder sb = new StringBuilder();
@@ -65,7 +129,101 @@ public class InstructorInsights extends javax.swing.JFrame {
         
         analyticsTextArea.setText(sb.toString());
     }
-
+    private void displayCharts() {
+        if (analytics == null) return;
+        
+        chartPanel.removeAll();
+        
+        try {
+            // Try to use JFreeChart if available
+            createJFreeCharts();
+        } catch (NoClassDefFoundError e) {
+            // Fallback to simple Java2D charts
+            createSimpleCharts();
+        }
+        
+        chartPanel.revalidate();
+        chartPanel.repaint();
+    }
+    
+    private void createJFreeCharts() {
+        // This will only work if JFreeChart is in classpath
+        Map<String, Double> quizAverages = (Map<String, Double>) analytics.get("lessonQuizAverages");
+        Map<String, Integer> lessonCompletion = (Map<String, Integer>) analytics.get("lessonCompletion");
+        
+        JPanel chartsContainer = new JPanel();
+        chartsContainer.setLayout(new BoxLayout(chartsContainer, BoxLayout.Y_AXIS));
+        
+        if (quizAverages != null && !quizAverages.isEmpty()) {
+            JPanel quizChart = SimpleChartUtils.createBarChart(
+                quizAverages, 
+                "Lesson Quiz Averages", 
+                "Lessons", 
+                "Average Score (%)"
+            );
+            quizChart.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+            chartsContainer.add(quizChart);
+        }
+        
+        if (lessonCompletion != null && !lessonCompletion.isEmpty()) {
+            // Convert completion counts to percentages
+            java.util.Map<String, Double> completionPercentages = new java.util.HashMap<>();
+            int totalStudents = (int) analytics.get("totalStudents");
+            
+            for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
+                double percentage = totalStudents > 0 ? 
+                    ((double) entry.getValue() / totalStudents) * 100 : 0;
+                completionPercentages.put(entry.getKey(), percentage);
+            }
+            
+            JPanel completionChart = SimpleChartUtils.createBarChart(
+                completionPercentages,
+                "Lesson Completion Rates",
+                "Lessons", 
+                "Completion Rate (%)"
+            );
+            completionChart.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+            chartsContainer.add(completionChart);
+        }
+        
+        JScrollPane scrollPane = new JScrollPane(chartsContainer);
+        chartPanel.add(scrollPane, BorderLayout.CENTER);
+    }
+    
+    private void createSimpleCharts() {
+        Map<String, Double> quizAverages = (Map<String, Double>) analytics.get("lessonQuizAverages");
+        Map<String, Integer> lessonCompletion = (Map<String, Integer>) analytics.get("lessonCompletion");
+        
+        JPanel chartsContainer = new JPanel();
+        chartsContainer.setLayout(new BoxLayout(chartsContainer, BoxLayout.Y_AXIS));
+        
+        if (quizAverages != null && !quizAverages.isEmpty()) {
+            SimpleBarChart quizChart = new SimpleBarChart(quizAverages, "Lesson Quiz Averages");
+            quizChart.setBorder(BorderFactory.createTitledBorder("Quiz Scores by Lesson"));
+            quizChart.setPreferredSize(new java.awt.Dimension(500, 300));
+            chartsContainer.add(quizChart);
+        }
+        
+        if (lessonCompletion != null && !lessonCompletion.isEmpty()) {
+            // Convert to percentages for chart
+            java.util.Map<String, Double> completionPercentages = new java.util.HashMap<>();
+            int totalStudents = (int) analytics.get("totalStudents");
+            
+            for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
+                double percentage = totalStudents > 0 ? 
+                    ((double) entry.getValue() / totalStudents) * 100 : 0;
+                completionPercentages.put(entry.getKey(), percentage);
+            }
+            
+            SimpleBarChart completionChart = new SimpleBarChart(completionPercentages, "Lesson Completion Rates");
+            completionChart.setBorder(BorderFactory.createTitledBorder("Completion Rates by Lesson"));
+            completionChart.setPreferredSize(new java.awt.Dimension(500, 300));
+            chartsContainer.add(completionChart);
+        }
+        
+        JScrollPane scrollPane = new JScrollPane(chartsContainer);
+        chartPanel.add(scrollPane, BorderLayout.CENTER);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

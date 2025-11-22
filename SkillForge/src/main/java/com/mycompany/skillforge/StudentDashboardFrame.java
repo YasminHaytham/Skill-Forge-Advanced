@@ -333,7 +333,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     }                                         
 
     private void ViewLessonsBtnActionPerformed(java.awt.event.ActionEvent evt) {
-
+       // addLessonProgress(String courseId, String LessonId);
         LessonList.setVisible(true);
         int selected = EnrolledCoursesList.getSelectedIndex();
         if (selected != -1) {
@@ -380,12 +380,14 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void LoadAvailableCoursesToList() {
         DefaultListModel<String> model = new DefaultListModel<>();
-        // if condition to check only for approved courses
+
         for (Course course : availableCourses) {
+            if(course.isApproved()){
             if (!course.isStudentEnrolled(Student)) {
                 model.addElement(course.getTitle());
             }
         }
+    }
         AvailableCoursesList.setModel(model);
           AvailableCoursesList.revalidate();
     AvailableCoursesList.repaint();
