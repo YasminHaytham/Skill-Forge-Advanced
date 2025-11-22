@@ -1,5 +1,5 @@
 package com.mycompany.skillforge;
-
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -130,6 +130,11 @@ public class Lesson {
         }
         lesson.OpResources = resources;
         return lesson;
+    }
+
+    public void setQuiz(Quiz quiz) {
+       
+        throw new UnsupportedOperationException("Unimplemented method 'setQuiz'");
     }
 
 }
