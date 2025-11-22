@@ -48,7 +48,7 @@ public class JsonDatabaseManager {
             Admins.add(admin);
         }
         return Admins;
-    }  
+    } 
 
     public List<Course> getAllDeclinedCourses() {
         JSONObject data = readFromFile(courseFile);
@@ -102,18 +102,6 @@ public class JsonDatabaseManager {
         return courses;
     }
 
-    public Course getCourseById (String courseId)
-    {
-        List <Course> courses = getAllCourses();
-        for ( Course c : courses)
-        {
-            if ( c.getCourseId().equals(courseId))
-            {
-                return c;
-            }
-        }
-        return null;
-    }
     public Course getApprovedCourseById (String courseId)
     {
         List <Course> courses = getAllApprovedCourses();
@@ -319,7 +307,7 @@ public class JsonDatabaseManager {
         return empFile;
     }
     
-    // NEW: Get students by their IDs
+
     public List<Student> getStudentsByIds(List<String> studentIds) {
         List<Student> students = new ArrayList<>();
         List<Student> allStudents = getAllStudents();
@@ -330,7 +318,7 @@ public class JsonDatabaseManager {
         }
         return students;
     }
-        // NEW: Get student by ID
+        
     public Student getStudentById(String studentId) {
         List<Student> allStudents = getAllStudents();
         for (Student student : allStudents) {

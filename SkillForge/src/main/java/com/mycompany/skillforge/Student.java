@@ -80,8 +80,10 @@ public class Student extends User {
     }
 
     public void addCompletedLesson(Lesson lesson) {
+        Progress pro= null;
         for (Progress p : progress) {
             if (p.getCourseId().equals(lesson.getCourseId())) {
+                pro=p;
                 for (LessonQuiz lq : p.getLessonQuizs()) {
                     if (lq.getLessonId().equals(lesson.getLessonId())) {
                         lq.MarkCompletedLessonQuiz();
@@ -89,7 +91,14 @@ public class Student extends User {
                 }
             }
         }
-        
+        if ( pro != null)
+        {
+            if (pro.isCourseCompleted())
+            {
+                pro.checkAndGenerateCertificate(this.userId);
+            }
+        }
+
         dbManager.updateStudent(this);
     }
 
