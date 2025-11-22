@@ -24,7 +24,7 @@ public class Student extends User {
 
     public void addEnrolledCourse(String courseId) {
         EnrolledCourses.add(courseId);
-        for ( Progress p :  progress) {
+        for (Progress p : progress) {
             if (p.getCourseId().equals(courseId)) {
                 return;
             }
@@ -47,34 +47,66 @@ public class Student extends User {
         return EnrolledCourses;
     }
 
-    public void addCompletedLesson(Lesson lesson) {
+    public void addLessonProgress(String courseId, String LessonId) {
+        boolean exists = false;
         for (Progress p : progress) {
-            if (p.getCourseId().equals(lesson.getCourseId())) {
-                boolean exists = false;
-                for (String Lid : p.getLessonId()) {
-                    if (Lid.equals(lesson.getLessonId())) {
+            if (p.getCourseId().equals(courseId)) {
+                for (LessonQuiz lq : p.getLessonQuizs()) {
+                    if (lq.getLessonId().equals(LessonId)) {
                         exists = true;
                         break;
                     }
                 }
                 if (!exists) {
-                    p.addLesson(lesson.getLessonId());
-                    dbManager.updateStudent(this);
+                    p.addLesson(LessonId);
                 }
-                return;
             }
         }
-        Progress newProgress = new Progress(lesson.getCourseId());
-        newProgress.addLesson(lesson.getLessonId());
-        progress.add(newProgress);
+        dbManager.updateStudent(this);
+    }
+
+    public void addLessonQuiz(String courseId, String LessonId, Quiz quiz) {
+        for (Progress p : progress) {
+            if (p.getCourseId().equals(courseId)) {
+                for (LessonQuiz lq : p.getLessonQuizs()) {
+                    if (lq.getLessonId().equals(LessonId)) {
+                        lq.setQuiz(quiz);
+                        break;
+                    }
+                }
+            }
+        }
+        dbManager.updateStudent(this);
+    }
+
+    public void addCompletedLesson(Lesson lesson) {
+        Progress pro= null;
+        for (Progress p : progress) {
+            if (p.getCourseId().equals(lesson.getCourseId())) {
+                pro=p;
+                for (LessonQuiz lq : p.getLessonQuizs()) {
+                    if (lq.getLessonId().equals(lesson.getLessonId())) {
+                        lq.MarkCompletedLessonQuiz();
+                    }
+                }
+            }
+        }
+        if ( pro != null)
+        {
+            if (pro.isCourseCompleted())
+            {
+                pro.checkAndGenerateCertificate(this.userId);
+            }
+        }
+
         dbManager.updateStudent(this);
     }
 
     public List<Course> getEnrolledCourseObjects() {
         List<Course> courses = new ArrayList<>();
-        List<Course> allCourses = dbManager.getAllCourses();
+        List<Course> ApprovedCourses = dbManager.getAllApprovedCourses();
         for (String courseId : EnrolledCourses) {
-            for (Course c : allCourses) {
+            for (Course c : ApprovedCourses) {
                 if (c.getCourseId().equals(courseId)) {
                     courses.add(c);
                     break;
@@ -86,18 +118,18 @@ public class Student extends User {
 
     public List<Lesson> getCompletedLessons() {
         List<Lesson> completedLessons = new ArrayList<>();
-        List<Course> allCourses = dbManager.getAllCourses();
+        List<Course> ApprovedCourses = dbManager.getAllApprovedCourses();
         for (Progress p : progress) {
             String courseId = p.getCourseId();
             Course course = null;
-            for (Course c : allCourses) {
+            for (Course c : ApprovedCourses) {
                 if (c.getCourseId().equals(courseId)) {
                     course = c;
                     break;
                 }
             }
             if (course != null) {
-                for (String lessonId : p.getLessonId()) {
+                for (String lessonId : p.getCompletedLessonIds()) {
                     for (Lesson lesson : course.getLessons()) {
                         if (lesson.getLessonId().equals(lessonId)) {
                             completedLessons.add(lesson);
@@ -154,5 +186,14 @@ public class Student extends User {
         jsonObject.put("Progress", progressArray);
 
         return jsonObject;
+    }
+        public QuizResult getQuizResult(String courseId, String lessonId) {
+        // TODO: Implement actual quiz result retrieval
+        return null; // placeholder
+    }
+    
+    public boolean hasCompletedCourse(String courseId) {
+        // TODO: Implement course completion check
+        return false; // placeholder
     }
 }

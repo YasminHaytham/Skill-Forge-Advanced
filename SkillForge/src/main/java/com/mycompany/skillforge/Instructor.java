@@ -1,5 +1,6 @@
 package com.mycompany.skillforge;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -50,6 +51,7 @@ public List<Course> getCreatedCourseObjects() {
 }
 
 
+
 public static Instructor fromJsonObject(JSONObject jsonObject) {
     String userId = jsonObject.getString("userId");
     String role = jsonObject.getString("role");
@@ -75,5 +77,70 @@ public JSONObject toJsonObject() {
     }
     jsonObject.put("CreatedCourses", coursesArray);
     return jsonObject;
+}
+
+public Map<String, Object> getCourseAnalytics(String courseId) {
+        Map<String, Object> analytics = new HashMap<>();
+        Course course = dbManager.getCourseById(courseId);
+        
+        if (course != null) {
+            // Student completion rates
+            List<Student> enrolledStudents = dbManager.getStudentsByIds(course.getStudentIDs());
+            int totalStudents = enrolledStudents.size();
+            int completedStudents = 0;
+            
+            // Quiz averages per lesson
+            Map<String, Double> lessonQuizAverages = new HashMap<>();
+            Map<String, Integer> lessonCompletion = new HashMap<>();
+            
+            for (Lesson lesson : course.getLessons()) {
+                double totalScore = 0;
+                int attemptCount = 0;
+                int completedCount = 0;
+                
+                for (Student student : enrolledStudents) {
+                    QuizResult result = student.getQuizResult(courseId, lesson.getLessonId());
+                    if (result != null) {
+                        totalScore += result.getScore();
+                        attemptCount++;
+                        if (result.isPassed()) {
+                            completedCount++;
+                        }
+                    }
+                }
+                
+                double averageScore = attemptCount > 0 ? totalScore / attemptCount : 0;
+                double completionRate = totalStudents > 0 ? (double) completedCount / totalStudents * 100 : 0;
+                
+                lessonQuizAverages.put(lesson.getTitle(), averageScore);
+                lessonCompletion.put(lesson.getTitle(), completedCount);
+            }
+            
+            // Overall course completion
+            for (Student student : enrolledStudents) {
+                if (student.hasCompletedCourse(courseId)) {
+                    completedStudents++;
+                }
+            }
+            
+            double courseCompletionRate = totalStudents > 0 ? (double) completedStudents / totalStudents * 100 : 0;
+            
+            analytics.put("totalStudents", totalStudents);
+            analytics.put("completedStudents", completedStudents);
+            analytics.put("courseCompletionRate", courseCompletionRate);
+            analytics.put("lessonQuizAverages", lessonQuizAverages);
+            analytics.put("lessonCompletion", lessonCompletion);
+        }
+        
+        return analytics;
+    }
+
+    public String getCourseApprovalStatus(String courseId) {
+        Course course = dbManager.getCourseById(courseId);
+        return course != null ? course.getstatus() : "NOT_FOUND";
+    }
+public void CompleteCourse(Course course) {
+    course.setCompleted(true);
+    dbManager.updateCourse(course);
 }
 }

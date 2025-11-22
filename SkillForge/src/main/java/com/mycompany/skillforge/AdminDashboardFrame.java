@@ -8,8 +8,10 @@ import javax.swing.table.DefaultTableModel;
 public class AdminDashboardFrame extends javax.swing.JFrame {
     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
     private DefaultTableModel model;
+    private Admin admin;
 
     public AdminDashboardFrame() {
+        this.admin=(Admin) Manager.getCurrentUser();
         initComponents();
         setTitle("Admin Dashboard");
 

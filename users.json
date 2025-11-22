@@ -1,38 +1,96 @@
 {
-    "Instructors": [{
-        "CreatedCourses": [
-            "C7650",
-            "C3349",
-            "C5885"
-        ],
-        "role": "Instructor",
-        "userId": "2940",
-        "email": "yasmin@gmail.com",
-        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-        "username": "yasmin"
-    }],
-    "Students": [{
-        "Progress": [
-            {
-                "courseId": "C7650",
-                "lessonIds": [
-                    "L6729",
-                    "L9698"
-                ]
-            },
-            {
-                "courseId": "C3349",
-                "lessonIds": []
-            }
-        ],
-        "role": "Student",
-        "userId": "4222",
-        "EnrolledCourses": [
-            "C7650",
-            "C3349"
-        ],
-        "email": "yasmin2@gmail.com",
-        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-        "username": "yazo"
-    }]
-}
+    "Instructors": [
+        {
+            "CreatedCourses": [
+                "C7650",
+                "C3349",
+                "C5885",
+                "C2899",
+                "C2539"
+            ],
+            "role": "Instructor",
+            "userId": "2940",
+            "email": "yasmin@gmail.com",
+            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+            "username": "yasmin"
+        },
+        {
+            "CreatedCourses": [],
+            "role": "Instructor",
+            "userId": "9551",
+            "email": "y@gmail.com",
+            "passwordHash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+            "username": "yahya"
+        },
+        {
+            "CreatedCourses": ["C7034"],
+            "role": "Instructor",
+            "userId": "8105",
+            "email": "ya@gmail.com",
+            "passwordHash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+            "username": "y"
+        }
+    ],
+    "Students": [
+        {
+            "Progress": [
+                {
+                    "lessonQuizs": [],
+                    "courseId": "C7650"
+                },
+                {
+                    "lessonQuizs": [],
+                    "courseId": "C3349"
+                }
+            ],
+            "role": "Student",
+            "userId": "4222",
+            "EnrolledCourses": [
+                "C7650",
+                "C3349"
+            ],
+            "email": "yasmin2@gmail.com",
+            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+            "username": "yazo"
+        },
+        {
+            "Progress": [
+                {
+                    "lessonQuizs": [{
+                        "quiz": null,
+                        "lessonId": "L3362",
+                        "completed": false
+                    }],
+                    "courseId": "C2899"
+                },
+                {
+                    "lessonQuizs": [{
+                        "quiz": null,
+                        "lessonId": "L0443",
+                        "completed": false
+                    }],
+                    "courseId": "C2539"
+                }
+            ],
+            "role": "Student",
+            "userId": "5623",
+            "EnrolledCourses": [
+                "C2899",
+                "C2539"
+            ],
+            "email": "q@gmail.com",
+            "passwordHash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+            "username": "ya"
+        }
+    ],
+    "Admins":[
+        {
+            "role": "Admin",
+            "userId": "1234",
+            "email": "ad@gmail.com",
+            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+            "username": "Admin1234"
+        }
+    ]
+          }
+   

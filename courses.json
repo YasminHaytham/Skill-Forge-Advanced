@@ -1,53 +1,68 @@
-{"Courses": [
-    {
-        "StudentIDs": ["4222"],
-        "description": "advandced math",
-        "title": "math",
-        "courseId": "C7650",
-        "instructorId": "2940",
-        "lessons": [
+{"Courses": [{
+    "StudentIDs": ["5623"],
+    "description": "math1",
+    "title": "math",
+    "courseId": "C2539",
+    "instructorId": "2940",
+    "isCompleted": false,
+    "status": "APPROVED",
+    "lessons": [{
+        "questions": [
             {
-                "OpResources": ["hi"],
-                "lessonId": "L6729",
-                "title": "lesson 1",
-                "courseId": "C7650",
-                "content": "math"
+                "options": [
+                    "a",
+                    "saass",
+                    "add",
+                    "dasd"
+                ],
+                "correctAnswer": "a",
+                "questionText": "Enter question 1 here"
             },
             {
-                "OpResources": [],
-                "lessonId": "L9698",
-                "title": "lesson 3",
-                "courseId": "C7650",
-                "content": "integration"
+                "options": [
+                    "SA",
+                    "SD",
+                    "SFSF",
+                    "GFG"
+                ],
+                "correctAnswer": "SA",
+                "questionText": "Enter question 2 here"
+            },
+            {
+                "options": [
+                    "DF",
+                    "DF",
+                    "HGF",
+                    "HGF"
+                ],
+                "correctAnswer": "DF",
+                "questionText": "Enter question 3 here"
+            },
+            {
+                "options": [
+                    "GFG",
+                    "GDF",
+                    "GR",
+                    "NB"
+                ],
+                "correctAnswer": "GFG",
+                "questionText": "Enter question 4 here"
+            },
+            {
+                "options": [
+                    "YTH",
+                    "TEE",
+                    "TR",
+                    "T"
+                ],
+                "correctAnswer": "YTH",
+                "questionText": "Enter question 5 here"
             }
-        ]
-    },
-    {
-        "StudentIDs": ["4222"],
-        "description": "fluid",
-        "title": "phy2",
-        "courseId": "C3349",
-        "instructorId": "2940",
-        "lessons": [{
-            "OpResources": [],
-            "lessonId": "L8692",
-            "title": "lesson 1",
-            "courseId": "C3349",
-            "content": "gas"
-        }]
-    },
-    {
-        "StudentIDs": [],
-        "description": "masr",
-        "title": "history",
-        "courseId": "C5885",
-        "instructorId": "2940",
-        "lessons": [{
-            "OpResources": [],
-            "lessonId": "L7171",
-            "title": "lesson 1",
-            "courseId": "C5885",
-            "content": "egypty"
-        }]
-    }
-]}
+        ],
+        "lessonId": "L0443",
+        "title": "lesson1",
+        "courseId": "C2539",
+        "opResources": [],
+        "content": "lesson1 content"
+    }]
+}]}
