@@ -24,6 +24,23 @@ public String[] getOptions() {
 public String getCorrectAnswer() {
     return correctAnswer;
 }
+public void setQuestionText(String questionText) {
+    this.questionText = questionText;
+}
+public void setOptions(String[] options) {
+    this.options = options;
+}
+public void setCorrectAnswer(String correctAnswer) {
+    this.correctAnswer = correctAnswer;
+}
+public String getOptionAt(int index) {
+    if (index >= 0 && index < options.length) {
+        return options[index];
+    }
+    return null;
+}
+}
+
  public static Question fromJsonObject(JSONObject jsonObject)
  {
         String questionText = jsonObject.getString("questionText");

@@ -6,7 +6,7 @@ public class Quiz {
 
     private String QuizId;
     private List<Question> questions;
-    private static final int MaxNumberofAttempts = 5;
+    private static final int MaxNumberofAttempts = 3;
     private int score;
     private List<Integer> studentScores;
     private int studentAttempts;

@@ -234,7 +234,7 @@ public class BrowseFrame extends javax.swing.JFrame {
             EnrollBtn.setVisible(false);
             return;
         }
-
+         // if condition to check only for approved courses
         for (Course course : availableCourses) {
             if (course.isStudentEnrolled(Student)) {
                 continue;

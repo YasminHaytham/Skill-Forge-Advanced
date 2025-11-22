@@ -26,7 +26,7 @@ public void setCreatedCourses(List<String> createdCourses) {
 
 public void createCourse( String title, String description) {
     String courseId = "C" + String.format("%04d", random.nextInt(10000));
-    Course course = new Course(courseId, title, description, this.getUserId());
+    Course course = new Course(courseId, title, description, this.getUserId(), false);
     try {
         dbManager.addCourse(course);
          CreatedCourses.add(courseId);
@@ -75,5 +75,9 @@ public JSONObject toJsonObject() {
     }
     jsonObject.put("CreatedCourses", coursesArray);
     return jsonObject;
+}
+public void CompleteCourse(Course course) {
+    course.setCompleted(true);
+    dbManager.updateCourse(course);
 }
 }
