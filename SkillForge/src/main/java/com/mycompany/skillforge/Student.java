@@ -47,6 +47,15 @@ public class Student extends User {
         return EnrolledCourses;
     }
 
+    /*public void addQuiz(String courseId , String lessonId)
+    {
+        for (Progress p : progress)
+        {
+            if (p.getCourseId().equals(courseId))
+                for ( )
+        }
+    }*/
+
     public void addCompletedLesson(Lesson lesson) {
         for (Progress p : progress) {
             if (p.getCourseId().equals(lesson.getCourseId())) {
@@ -69,6 +78,7 @@ public class Student extends User {
         progress.add(newProgress);
         dbManager.updateStudent(this);
     }
+
 
     public List<Course> getEnrolledCourseObjects() {
         List<Course> courses = new ArrayList<>();
