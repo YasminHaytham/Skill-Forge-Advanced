@@ -306,15 +306,6 @@ public class JsonDatabaseManager {
         }
         return empFile;
     }
-        public Course getCourseById(String courseId) {
-        List<Course> allCourses = getAllCourses();
-        for (Course course : allCourses) {
-            if (course.getCourseId().equals(courseId)) {
-                return course;
-            }
-        }
-        return null;
-    }
     
 
     public List<Student> getStudentsByIds(List<String> studentIds) {

@@ -155,8 +155,6 @@ public class Course {
     }
 // Methods to manage students
 // adding and removing students from the course
-    // Methods to manage students
-    // adding and removing students from the course
 
     public boolean isStudentEnrolled(Student student) {
         return studentIDs.contains(student.getUserId());

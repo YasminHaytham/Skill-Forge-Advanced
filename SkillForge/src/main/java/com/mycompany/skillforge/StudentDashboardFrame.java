@@ -72,9 +72,9 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText(Student.getUsername());
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText(Student.getUserId());
 
         EnrolledCoursesList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -148,7 +148,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             }
         });
 
-        GenerateCertificateBtn.setText("Generate Certificate ");
+        GenerateCertificateBtn.setText("View Certificate Earned");
         GenerateCertificateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GenerateCertificateBtnActionPerformed(evt);
@@ -305,6 +305,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         int selected = LessonList.getSelectedIndex();
         if (selected != -1) {
             Lesson selectedLesson = Student.getEnrolledCourseObjects().get(EnrolledCoursesList.getSelectedIndex()).getLessons().get(selected);
+            Student.addLessonProgress(Student.getEnrolledCourseObjects().get(EnrolledCoursesList.getSelectedIndex()).getCourseId() , selectedLesson.getLessonId());
             LessonFrame lessonFrame = new LessonFrame(selectedLesson);
             lessonFrame.setVisible(true);
             this.setVisible(false);
@@ -315,7 +316,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void GenerateCertificateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateCertificateBtnActionPerformed
    this.dispose();
-// Call Certificate Frame
+    // Call Certificate Frame Yasmin
     }//GEN-LAST:event_GenerateCertificateBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,7 +334,6 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     }                                         
 
     private void ViewLessonsBtnActionPerformed(java.awt.event.ActionEvent evt) {
-       // addLessonProgress(String courseId, String LessonId);
         LessonList.setVisible(true);
         int selected = EnrolledCoursesList.getSelectedIndex();
         if (selected != -1) {
