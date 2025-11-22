@@ -102,6 +102,31 @@ public class JsonDatabaseManager {
         return courses;
     }
 
+    public Course getCourseById (String courseId)
+    {
+        List <Course> courses = getAllCourses();
+        for ( Course c : courses)
+        {
+            if ( c.getCourseId().equals(courseId))
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+    public Course getApprovedCourseById (String courseId)
+    {
+        List <Course> courses = getAllApprovedCourses();
+        for ( Course c : courses)
+        {
+            if ( c.getCourseId().equals(courseId))
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+
     private JSONObject readFromFile(String fileName) {
         try {
             String data = new String(Files.readAllBytes(Paths.get(fileName)));
@@ -287,6 +312,7 @@ public class JsonDatabaseManager {
         if (fileName.equals(userFile)) {
             empFile.put("Instructors", new JSONArray());
             empFile.put("Students", new JSONArray());
+            empFile.put("Admins",new JSONArray());
         } else if (fileName.equals(courseFile)) {
             empFile.put("Courses", new JSONArray());
         }

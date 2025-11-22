@@ -136,11 +136,11 @@ public class LessonFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuizBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_QuizBtnActionPerformed
-        if (lesson.getQuestions().size()==0) {
+        Quiz q= this.lesson.generateQuiz(student);
+        if (q==null) {
             JOptionPane.showMessageDialog(this, "No quiz available for this lesson.");
             return;
         }
-        Quiz q= this.lesson.GenerateQuiz(student);
         if(q.getStudentAttempts() >=q.getMaxNumberofAttempts()){
             JOptionPane.showMessageDialog(this, "You have reached the maximum number of attempts for this quiz.");
             return;

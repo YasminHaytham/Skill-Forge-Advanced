@@ -10,10 +10,15 @@ public class Progress {
 
     private String courseId;
     private List<LessonQuiz> lessonQuizs;
+    private boolean Completed;
+    private Certificate certificate;
+     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
 
     public Progress(String courseId) {
         this.courseId = courseId;
         this.lessonQuizs = new ArrayList<>();
+        this.Completed = false;
+        this.certificate = null;
     }
 
     public String getCourseId() {
@@ -33,13 +38,49 @@ public class Progress {
         }
         return lessonIds;
     }
+    private void GenerateCertificate(String studentId)
+    {
+        Certificate c = new Certificate(studentId, courseId);
+        this.certificate=c;
+    }
+
+   private boolean isCourseCompleted() {
+    if (this.Completed)
+    {
+        return true;
+    }
+        Course course = dbManager.getApprovedCourseById(courseId);
+        if (course == null) {
+            return false;
+        }
+        
+        List<Lesson> courseLessons = course.getLessons();
+        if (courseLessons.isEmpty()) {
+            return false; 
+        }
+        
+        for (Lesson lesson : courseLessons) {
+            boolean lessonCompleted = false;
+            for (LessonQuiz lq : lessonQuizs) {
+                if (lq.getLessonId().equals(lesson.getLessonId()) && lq.isCompleted()) {
+                    lessonCompleted = true;
+                    break;
+                }
+            }
+            if (!lessonCompleted) {
+                return false; 
+            }
+        }
+        this.Completed=true;
+        return true;
+    }
 
     public void addLesson(String lessonId) {
-        
+
         lessonQuizs.add(new LessonQuiz(lessonId));
     }
 
-     public static Progress fromJsonObject(JSONObject jsonObject) {
+    public static Progress fromJsonObject(JSONObject jsonObject) {
         String courseId = jsonObject.getString("courseId");
         Progress progress = new Progress(courseId);
 
@@ -54,16 +95,17 @@ public class Progress {
 
         return progress;
     }
+
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("courseId", this.courseId);
-        
+
         JSONArray lessonQuizsArray = new JSONArray();
         for (LessonQuiz lessonQuiz : this.lessonQuizs) {
             lessonQuizsArray.put(lessonQuiz.toJsonObject());
         }
         jsonObject.put("lessonQuizs", lessonQuizsArray);
-        
+
         return jsonObject;
     }
 }

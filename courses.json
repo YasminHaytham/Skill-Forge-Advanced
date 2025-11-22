@@ -1,16 +1,3 @@
-{"Courses": [{
-    "StudentIDs": ["5623"],
-    "description": "math1",
-    "title": "math",
-    "courseId": "C2899",
-    "instructorId": "2940",
-    "isCompleted": false,
-    "status": "APPROVED",
-    "lessons": [{
-        "OpResources": [],
-        "lessonId": "L3362",
-        "title": "lesson1",
-        "courseId": "C2899",
-        "content": "lesson1 content"
-    }]
-}]}
+{"Courses": [
+    
+]}

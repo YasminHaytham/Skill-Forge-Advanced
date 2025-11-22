@@ -68,9 +68,8 @@ public class Course {
         return courseId;
     }
 
-   public void setCompleted(boolean isCompleted) {
-        if(isCompleted)
-        {
+    public void setCompleted(boolean isCompleted) {
+        if (isCompleted) {
             return;
         }
         this.isCompleted = isCompleted;
@@ -150,8 +149,12 @@ public class Course {
         }
         return students;
     }
-    // Methods to manage students
-    // adding and removing students from the course
+
+    public void markAsCompleted() {
+        this.isCompleted = true;
+    }
+// Methods to manage students
+// adding and removing students from the course
 
     public boolean isStudentEnrolled(Student student) {
         return studentIDs.contains(student.getUserId());
@@ -230,8 +233,7 @@ public class Course {
             }
 
         }
-        Course course = new Course(courseId, title, description, instructorId, lessons, studentIDs, isCompleted,
-                status);
+        Course course = new Course(courseId, title, description, instructorId, lessons, studentIDs, isCompleted, status);
         return course;
     }
 
