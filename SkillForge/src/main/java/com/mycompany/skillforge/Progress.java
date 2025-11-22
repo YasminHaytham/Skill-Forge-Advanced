@@ -42,7 +42,7 @@ public class Progress {
     if (isCourseCompleted() && certificate == null) {
         Certificate c = new Certificate(studentId, courseId);
         this.certificate = c;
-        Student student = dbManager.getStudentbyID(studentId);
+        Student student = dbManager.getStudentById(studentId);
         if (student != null)
         {
         dbManager.updateStudent(student);
