@@ -25,6 +25,15 @@ public class Quiz {
         this.studentAttempts = 0;
         this.passed = false;
     }
+      public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
+            boolean passed) {
+        QuizId = quizId;
+        this.questions = questions;
+        this.studentScores = studentScores;
+        this.studentAttempts = studentAttempts;
+        this.passed = passed;
+        this.score = 0;
+    }
 
     public Quiz(String quizId) {
         this.questions = new ArrayList<>();
@@ -32,11 +41,6 @@ public class Quiz {
         this.studentAttempts = 0;
         this.score = 0;
         this.passed = false;
-    }
-
-    // Getters and setters
-    public String getQuizId() { 
-        return QuizId; 
     }
     
     public List<Question> getQuestions() { 
@@ -95,16 +99,8 @@ public class Quiz {
     
     public void clearQuestions() {
         questions.clear();
-    public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
-            boolean passed) {
-        QuizId = quizId;
-        this.questions = questions;
-        this.studentScores = studentScores;
-        this.studentAttempts = studentAttempts;
-        this.passed = passed;
-        this.score = 0;
     }
-
+  
     public String getQuizId() {
         return this.QuizId;
     }
@@ -269,3 +265,4 @@ public class Quiz {
     }
 
 }
+
