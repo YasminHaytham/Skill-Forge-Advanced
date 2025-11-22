@@ -1,5 +1,7 @@
 package com.mycompany.skillforge;
 
+import org.json.JSONObject;
+
 public class Admin extends User {
 
     public Admin(String userId, String role, String username, String email, String passwordHash) {
@@ -11,15 +13,24 @@ public class Admin extends User {
     }
 
     public void declinedCourse(Course course) {
-        course.Declined();
+        course.Decline();
     }
     
-    public void toggleStatus() {
-        if ("Approved".equals(this.status)) {
-            this.status = "Declined";
+    public void toggleStatus( Course course) {
+        if (course.isApproved()) {
+            course.Decline();
         } else {
-            this.status = "Approved";
+           course.Approve();
         }
     }
+
+      public static Admin fromJsonObject(JSONObject jsonObject) {
+        String userId = jsonObject.getString("userId");
+        String role = jsonObject.getString("role");
+        String username = jsonObject.getString("username");
+        String email = jsonObject.getString("email");
+        String passwordHash = jsonObject.getString("passwordHash");
+        return new Admin(userId, role, username, email, passwordHash);
+      }
 
 }
