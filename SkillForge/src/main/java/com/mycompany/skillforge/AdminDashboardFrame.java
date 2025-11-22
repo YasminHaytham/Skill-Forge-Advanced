@@ -126,7 +126,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         if (row != -1) {
             String courseId = (String) model.getValueAt(row, 0);
             Course c = dbManager.getCourseById(courseId);
-            c.Approve();
+            admin.approveCourse(c);
             model.setValueAt(c.getStatus(), row, 4);
             dbManager.updateCourse(c);
         } else {
@@ -139,7 +139,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         if (row != -1) {
             String courseId = (String) model.getValueAt(row, 0);
             Course c = dbManager.getCourseById(courseId);
-            c.Decline();
+            admin.declinedCourse(c);
             model.setValueAt(c.getStatus(), row, 4);
             dbManager.updateCourse(c);
         } else {
@@ -152,13 +152,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         if (row != -1) {
             String courseId = (String) model.getValueAt(row, 0);
             Course c = dbManager.getCourseById(courseId);
-            if (c.getStatus().equals("Approved")) {
-                c.Decline();
-            } else {
-                c.Approve();
-            }
-            model.setValueAt(c.getStatus(), row, 4);
-            dbManager.updateCourse(c);
+            admin.toggleStatus(c);
         } else {
             JOptionPane.showMessageDialog(this, "Select a course first!");
         }
