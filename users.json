@@ -4,7 +4,8 @@
             "CreatedCourses": [
                 "C7650",
                 "C3349",
-                "C5885"
+                "C5885",
+                "C2899"
             ],
             "role": "Instructor",
             "userId": "2940",
@@ -33,12 +34,12 @@
         {
             "Progress": [
                 {
-                    "courseId": "C7650",
-                    "lessonIds": []
+                    "lessonQuizs": [],
+                    "courseId": "C7650"
                 },
                 {
-                    "courseId": "C3349",
-                    "lessonIds": []
+                    "lessonQuizs": [],
+                    "courseId": "C3349"
                 }
             ],
             "role": "Student",
@@ -52,15 +53,20 @@
             "username": "yazo"
         },
         {
-            "Progress": [],
+            "Progress": [{
+                "lessonQuizs": [{
+                    "quiz": null,
+                    "lessonId": "L3362",
+                    "completed": false
+                }],
+                "courseId": "C2899"
+            }],
             "role": "Student",
             "userId": "5623",
-            "EnrolledCourses": [],
+            "EnrolledCourses": ["C2899"],
             "email": "q@gmail.com",
             "passwordHash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
             "username": "ya"
         }
     ]
-
-          }
-   
+}

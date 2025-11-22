@@ -68,7 +68,11 @@ public class Course {
         return courseId;
     }
 
-    public void setCompleted(boolean isCompleted) {
+   public void setCompleted(boolean isCompleted) {
+        if(isCompleted)
+        {
+            return;
+        }
         this.isCompleted = isCompleted;
     }
 
