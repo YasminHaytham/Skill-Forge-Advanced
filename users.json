@@ -1,16 +1,26 @@
 {
-    "Instructors": [{
-        "CreatedCourses": [
-            "C7650",
-            "C3349",
-            "C5885"
-        ],
-        "role": "Instructor",
-        "userId": "2940",
-        "email": "yasmin@gmail.com",
-        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-        "username": "yasmin"
-    }],
+    "Instructors": [
+        {
+            "CreatedCourses": [
+                "C7650",
+                "C3349",
+                "C5885"
+            ],
+            "role": "Instructor",
+            "userId": "2940",
+            "email": "yasmin@gmail.com",
+            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+            "username": "yasmin"
+        },
+        {
+            "CreatedCourses": [],
+            "role": "Instructor",
+            "userId": "5714",
+            "email": "f1@gmail.com",
+            "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+            "username": "f"
+        }
+    ],
     "Students": [
         {
             "Progress": [

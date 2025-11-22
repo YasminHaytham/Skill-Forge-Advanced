@@ -15,20 +15,27 @@ public class Course {
     private String instructorId;
     private List<Lesson> lessons;
     private List<String> studentIDs;
+    private boolean isCompleted = false;
+    private String status ; 
     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
     private Random random = new Random();
 
-    public Course(String courseId, String title, String description, String instructorId) {
+    public Course(String courseId, String title, String description, String instructorId , boolean isCompleted) {
         this.courseId = courseId;
         this.title = title;
         this.description = description;
         this.instructorId = instructorId;
         this.lessons = new ArrayList<>();
         this.studentIDs = new ArrayList<>();
+        this.isCompleted = false;
     }
 
     public String getCourseId() {
         return courseId;
+    }
+    
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public void setCourseId(String courseId) {
@@ -158,7 +165,7 @@ public class Course {
             }
     
         }
-        Course course = new Course(courseId, title, description, instructorId);
+        Course course = new Course(courseId, title, description, instructorId , false);
         course.setLessons(lessons);
         course.setStudentIDs(studentIDs);
         return course;

@@ -416,6 +416,7 @@ public class QuizFrame extends javax.swing.JFrame {
             if (getSelectedButtonText(buttonGroup5,jRadioButton17,jRadioButton18,jRadioButton19,jRadioButton20).equals(quiz.getAllQuestions().get(4).getCorrectAnswer())) {
                  quiz.incrementScore();
             }
+            quiz.setScore(0);
             if(quiz.isPassed()) {
                 lesson.markAsCompleted(student);
             }

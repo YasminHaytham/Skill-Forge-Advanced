@@ -68,6 +68,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         ViewLessonsBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
         LessonFrameBtn = new javax.swing.JButton();
+        GenerateCertificateBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +148,13 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        GenerateCertificateBtn.setText("Generate Certificate ");
+        GenerateCertificateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerateCertificateBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,7 +195,9 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(LessonFrameBtn)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LessonFrameBtn)
+                                    .addComponent(GenerateCertificateBtn))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -224,7 +234,9 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LessonFrameBtn)
-                        .addGap(62, 62, 62)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(GenerateCertificateBtn)
+                        .addGap(27, 27, 27)
                         .addComponent(LogOutBtn)))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
@@ -301,6 +313,11 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LessonFrameBtnActionPerformed
 
+    private void GenerateCertificateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateCertificateBtnActionPerformed
+   this.dispose();
+// Call Certificate Frame
+    }//GEN-LAST:event_GenerateCertificateBtnActionPerformed
+
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {
         int confirm = JOptionPane.showConfirmDialog(this,
                 "Are you sure you want to Log Out?",
@@ -363,6 +380,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void LoadAvailableCoursesToList() {
         DefaultListModel<String> model = new DefaultListModel<>();
+        // if condition to check only for approved courses
         for (Course course : availableCourses) {
             if (!course.isStudentEnrolled(Student)) {
                 model.addElement(course.getTitle());
@@ -412,6 +430,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton BrowseBtn;
     private javax.swing.JButton EnrollBtn;
     private javax.swing.JList<String> EnrolledCoursesList;
+    private javax.swing.JButton GenerateCertificateBtn;
     private javax.swing.JButton LessonFrameBtn;
     private javax.swing.JList<String> LessonList;
     private javax.swing.JButton LogOutBtn;
