@@ -81,6 +81,17 @@ public class Course {
     public void setStudentIDs(List<String> studentIDs) {
         this.studentIDs = studentIDs;
     }
+
+    public String getStatus() {
+        return status;
+    }
+    public void ApproveCourse() {
+        this.status = "Approved";
+    }
+
+    public void DeclineCourse() {
+        this.status = "Declined";
+    }
     public List <Student> getStudentsObjects() {
         List<Student> students = new ArrayList<>();
         List <Student> allStudents = dbManager.getAllStudents();

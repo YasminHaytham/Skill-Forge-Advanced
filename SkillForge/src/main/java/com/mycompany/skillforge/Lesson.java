@@ -12,11 +12,12 @@ public class Lesson {
     private String title;
     private String content;
     private List<String> OpResources;
-    private Quiz quiz;
+    private List<Question> question;
     
 
     public Lesson() {
         this.OpResources = new ArrayList<>();
+        this.questions = new ArrayList<>();
     }
 
     public Lesson(String lessonId, String title, String content, String courseId ,Quiz quiz) {
@@ -25,7 +26,6 @@ public class Lesson {
         this.title = title;
         this.content = content;
         this.courseId = courseId;
-        this.quiz = quiz;
     }
 
     public String getLessonId() {
@@ -53,12 +53,36 @@ public class Lesson {
     public void setContent(String content) {
         this.content = content;
     }
+
     public String getCourseId() {
         return courseId;
     }
+
     public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
+
+    public void createQuestion(Question question) {
+        this.questions.add(question);
+    }
+
+    public Quiz GenerateQuiz(Student student) {
+    for (Progress p : student.getProgress()) {
+            if (p.getCourseId().equals(this.courseId)) {
+                for (LessonQuiz lq : p.getLessonQuizs()) {
+                    if (lq.getLessonId().equals(this.lessonId)) {
+                        return lq.getQuiz();
+                    }
+                }
+            }
+        }
+
+            String quizId = String.format("%03d", random.nextInt(10000)) + this.lessonId + "_quiz";
+            Quiz newQuiz = new Quiz(quizId, this.questions);
+            //add quiz in student
+            return newQuiz;
+
+        }
 
     public List<String> getResources() {
         return OpResources;
@@ -70,7 +94,7 @@ public class Lesson {
         this.OpResources = resource;
     }
 
-    public void markAsCompleted( Student student) {
+    public void markAsCompleted(Student student) {
         student.addCompletedLesson(this);
     }
 
@@ -99,6 +123,5 @@ public class Lesson {
         lesson.OpResources = resources;
         return lesson;
     }
-
 
 }
