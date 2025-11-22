@@ -38,13 +38,19 @@ public class Progress {
         }
         return lessonIds;
     }
-    private void GenerateCertificate(String studentId)
-    {
+    public void checkAndGenerateCertificate(String studentId) {
+    if (isCourseCompleted() && certificate == null) {
         Certificate c = new Certificate(studentId, courseId);
-        this.certificate=c;
+        this.certificate = c;
+        Student student = dbManager.getStudentbyID(studentId);
+        if (student != null)
+        {
+        dbManager.updateStudent(student);
+        }
     }
+}
 
-   private boolean isCourseCompleted() {
+   public boolean isCourseCompleted() {
     if (this.Completed)
     {
         return true;
@@ -93,18 +99,34 @@ public class Progress {
             }
         }
 
+        if (jsonObject.has("completed")) {
+            progress.Completed = jsonObject.getBoolean("completed");
+        }
+
+        if (jsonObject.has("certificate") && !jsonObject.isNull("certificate")) {
+            JSONObject certJson = jsonObject.getJSONObject("certificate");
+            progress.certificate = Certificate.fromJsonObject(certJson);
+        }
+
         return progress;
     }
 
-    public JSONObject toJsonObject() {
+   public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("courseId", this.courseId);
+        jsonObject.put("completed", this.Completed);
 
         JSONArray lessonQuizsArray = new JSONArray();
         for (LessonQuiz lessonQuiz : this.lessonQuizs) {
             lessonQuizsArray.put(lessonQuiz.toJsonObject());
         }
         jsonObject.put("lessonQuizs", lessonQuizsArray);
+
+        if (this.certificate != null) {
+            jsonObject.put("certificate", this.certificate.toJsonObject());
+        } else {
+            jsonObject.put("certificate", JSONObject.NULL);
+        }
 
         return jsonObject;
     }

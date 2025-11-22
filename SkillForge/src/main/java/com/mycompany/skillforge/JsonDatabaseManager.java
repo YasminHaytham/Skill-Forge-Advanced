@@ -101,6 +101,18 @@ public class JsonDatabaseManager {
         }
         return courses;
     }
+    public Student getStudentbyID(String studentId)
+    {
+        List<Student> students= getAllStudents();
+        for (Student s : students)
+        {
+            if (s.getUserId().equals(studentId))
+            {
+                return s;
+            }
+        }
+        return null;
+    }
 
     public Course getCourseById (String courseId)
     {
