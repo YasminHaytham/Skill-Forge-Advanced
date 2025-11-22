@@ -38,7 +38,7 @@ public class JsonDatabaseManager {
         }
         return instructors;
     }
-   /* public List<Admin> getAllAdmins() {
+   public List<Admin> getAllAdmins() {
         JSONObject data = readFromFile(userFile);
         JSONArray adminsArray = data.getJSONArray("Admins");
         List<Admin> Admins = new ArrayList<>();
@@ -48,7 +48,7 @@ public class JsonDatabaseManager {
             Admins.add(admin);
         }
         return Admins;
-    } */ 
+    }  
 
     public List<Course> getAllDeclinedCourses() {
         JSONObject data = readFromFile(courseFile);
@@ -317,15 +317,6 @@ public class JsonDatabaseManager {
             empFile.put("Courses", new JSONArray());
         }
         return empFile;
-    }
-        public Course getCourseById(String courseId) {
-        List<Course> allCourses = getAllCourses();
-        for (Course course : allCourses) {
-            if (course.getCourseId().equals(courseId)) {
-                return course;
-            }
-        }
-        return null;
     }
     
     // NEW: Get students by their IDs
