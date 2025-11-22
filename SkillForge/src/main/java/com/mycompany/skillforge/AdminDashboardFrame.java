@@ -4,14 +4,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class AdminDashboardFrame extends javax.swing.JFrame {
+
     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
     private DefaultTableModel model;
     private Admin admin;
 
     public AdminDashboardFrame() {
-        this.admin=(Admin) Manager.getCurrentUser();
+        this.admin = (Admin) Manager.getCurrentUser();
         initComponents();
         setTitle("Admin Dashboard");
 
@@ -22,8 +22,8 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         loadCourses();
     }
 
-     private void loadCourses() {
-        model.setRowCount(0); 
+    private void loadCourses() {
+        model.setRowCount(0);
         List<Course> courses = dbManager.getAllCourses();
         for (Course c : courses) {
             model.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription(), c.getInstructorId(), c.getStatus()});
@@ -40,6 +40,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         refreshButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
+        logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +85,13 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(courseTable);
 
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,7 +112,10 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
                         .addGap(133, 133, 133))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180))))
+                        .addGap(180, 180, 180))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(150, 150, 150))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +128,9 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
                     .addComponent(toggleButton))
                 .addGap(61, 61, 61)
                 .addComponent(refreshButton)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(logoutButton)
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,7 +171,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Select a course first!");
         }
-    
+
 
     }//GEN-LAST:event_toggleButtonActionPerformed
 
@@ -166,20 +179,35 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         loadCourses();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to Log Out?",
+                "Confirm Log Out",
+                JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        } else {
+            this.dispose();
+            Login loginFrame = new Login();
+            loginFrame.setVisible(true);
+        }
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
     public static void main(String args[]) {
 
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new AdminDashboardFrame().setVisible(true);
-        }
-    });
-}
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminDashboardFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton approveButton;
     private javax.swing.JTable courseTable;
     private javax.swing.JButton declineButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton toggleButton;
     // End of variables declaration//GEN-END:variables
