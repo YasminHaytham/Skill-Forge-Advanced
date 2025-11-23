@@ -398,9 +398,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a course first");
         }
     }//GEN-LAST:event_ViewCertificateBtnActionPerformed
-    private void ViewCertificateBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ViewCertificateBtnActionPerformed
-
-    }// GEN-LAST:event_ViewCertificateBtnActionPerformed
+ 
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {
         int confirm = JOptionPane.showConfirmDialog(this,
