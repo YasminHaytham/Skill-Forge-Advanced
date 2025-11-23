@@ -1,5 +1,8 @@
 {"Courses": [{
-    "StudentIDs": ["4522"],
+    "StudentIDs": [
+        "4522",
+        "9784"
+    ],
     "description": "math1",
     "title": "math",
     "courseId": "C3981",
