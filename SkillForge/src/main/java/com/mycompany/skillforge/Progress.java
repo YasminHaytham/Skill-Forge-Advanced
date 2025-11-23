@@ -28,6 +28,13 @@ public class Progress {
     public List<LessonQuiz> getLessonQuizs() {
         return lessonQuizs;
     }
+    public Certificate getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(Certificate certificate) {
+        this.certificate = certificate;
+    }
 
     public List<String> getCompletedLessonIds() {
         List<String> lessonIds = new ArrayList<>();

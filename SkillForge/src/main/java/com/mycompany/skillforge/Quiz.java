@@ -2,8 +2,6 @@ package com.mycompany.skillforge;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -223,7 +221,7 @@ public class Quiz {
 
     public static Quiz fromJsonObject(JSONObject jsonObject) {
         String QuizId = jsonObject.getString("QuizId");
-        int studentAttempts = jsonObject.getInt("studentAttemptts");
+        int studentAttempts = jsonObject.getInt("studentAttempts");
         boolean passed = jsonObject.getBoolean("passed");
         List<Question> questions = new ArrayList<>();
         if (jsonObject.has("questions")) {

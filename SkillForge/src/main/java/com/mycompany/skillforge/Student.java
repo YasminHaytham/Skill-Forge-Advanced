@@ -141,6 +141,24 @@ public class Student extends User {
         }
         return completedLessons;
     }
+    public boolean hasCertificate(Course course) {
+    return getCertificate(course) != null;
+}
+
+    public Certificate getCertificate(Course course)
+    {
+        for ( Progress p : progress)
+        {
+            if ( p.getCourseId().equals(course.getCourseId()))
+            {
+                if(p.getCertificate()!=null)
+                {
+                    return p.getCertificate();
+                }
+            }
+        }
+        return null;
+    }
 
     public static Student fromJsonObject(JSONObject jsonObject) {
         String userId = jsonObject.getString("userId");
