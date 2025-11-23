@@ -1,5 +1,7 @@
 package com.mycompany.skillforge;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,6 +14,7 @@ public Question(String questionText, String[] options, String correctAnswer) {
     this.options = options;
     this.correctAnswer = correctAnswer;
 }
+
 public boolean isCorrect(String selectedAnswer) {
     return selectedAnswer.equals(correctAnswer);
 }

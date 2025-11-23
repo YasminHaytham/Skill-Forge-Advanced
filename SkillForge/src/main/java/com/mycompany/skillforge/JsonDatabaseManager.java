@@ -38,7 +38,7 @@ public class JsonDatabaseManager {
         }
         return instructors;
     }
-     public List<Admin> getAllAdmins() {
+   public List<Admin> getAllAdmins() {
         JSONObject data = readFromFile(userFile);
         JSONArray adminsArray = data.getJSONArray("Admins");
         List<Admin> Admins = new ArrayList<>();
@@ -48,7 +48,7 @@ public class JsonDatabaseManager {
             Admins.add(admin);
         }
         return Admins;
-    }
+    } 
 
     public List<Course> getAllDeclinedCourses() {
         JSONObject data = readFromFile(courseFile);
@@ -100,6 +100,30 @@ public class JsonDatabaseManager {
             courses.add(course);
         }
         return courses;
+    }
+     public Course getCourseById (String courseId)
+    {
+        List <Course> courses = getAllCourses();
+        for ( Course c : courses)
+        {
+            if ( c.getCourseId().equals(courseId))
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+    public Course getApprovedCourseById (String courseId)
+    {
+        List <Course> courses = getAllApprovedCourses();
+        for ( Course c : courses)
+        {
+            if ( c.getCourseId().equals(courseId))
+            {
+                return c;
+            }
+        }
+        return null;
     }
 
     private JSONObject readFromFile(String fileName) {
@@ -287,10 +311,33 @@ public class JsonDatabaseManager {
         if (fileName.equals(userFile)) {
             empFile.put("Instructors", new JSONArray());
             empFile.put("Students", new JSONArray());
+            empFile.put("Admins",new JSONArray());
         } else if (fileName.equals(courseFile)) {
             empFile.put("Courses", new JSONArray());
         }
         return empFile;
     }
     
+
+    public List<Student> getStudentsByIds(List<String> studentIds) {
+        List<Student> students = new ArrayList<>();
+        List<Student> allStudents = getAllStudents();
+        for (Student student : allStudents) {
+            if (studentIds.contains(student.getUserId())) {
+                students.add(student);
+            }
+        }
+        return students;
+    }
+        
+    public Student getStudentById(String studentId) {
+        List<Student> allStudents = getAllStudents();
+        for (Student student : allStudents) {
+            if (student.getUserId().equals(studentId)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
 }

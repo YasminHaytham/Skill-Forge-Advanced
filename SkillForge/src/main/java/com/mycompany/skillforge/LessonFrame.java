@@ -4,6 +4,10 @@
  */
 package com.mycompany.skillforge;
 
+
+
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -11,8 +15,10 @@ import javax.swing.JOptionPane;
  * @author Farah
  */
 public class LessonFrame extends javax.swing.JFrame {
-    Lesson lesson;
-    Student student;
+    private Lesson lesson;
+   private Student student ;
+   private List<String> resources;
+   private String  optionalResources;
 
     public LessonFrame(Lesson lesson) {
 
@@ -21,6 +27,12 @@ public class LessonFrame extends javax.swing.JFrame {
         }
         this.lesson = lesson;
         student =(Student) Manager.getCurrentUser();
+        resources=lesson.getResources();
+        if (resources.isEmpty()) {
+                        optionalResources = "";
+                    } else {
+                        optionalResources = String.join(", ", resources);
+                    }
         initComponents();
     }
 
@@ -31,7 +43,7 @@ public class LessonFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         LessonTitle = new javax.swing.JLabel();
@@ -47,7 +59,7 @@ public class LessonFrame extends javax.swing.JFrame {
 
         LessonTitle.setText(lesson.getTitle());
 
-        CourseName.setText("Course ID: " + lesson.getCourseId());
+        CourseName.setText("Course: " + lesson.getCourseId());
 
         jLabel1.setText("Content");
 
@@ -62,7 +74,7 @@ public class LessonFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Optional Resourses");
 
-        OptionalResoursesLabel.setText(lesson.getResources().toString());
+        OptionalResoursesLabel.setText( optionalResources);
 
         GoBackBtn.setText("Go Back");
         GoBackBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -74,73 +86,63 @@ public class LessonFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(ContentText,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 290,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(QuizBtn))
-                                                        .addComponent(OptionalResoursesLabel,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 263,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(LessonTitle, javax.swing.GroupLayout.Alignment.LEADING,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                                .addComponent(CourseName, javax.swing.GroupLayout.Alignment.LEADING,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(33, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(GoBackBtn)
-                                .addGap(24, 24, 24)));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(LessonTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CourseName)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ContentText, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(ContentText, javax.swing.GroupLayout.PREFERRED_SIZE, 132,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(26, 26, 26)
-                                                .addComponent(QuizBtn)))
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(OptionalResoursesLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(GoBackBtn)
-                                .addContainerGap(25, Short.MAX_VALUE)));
+                                .addComponent(QuizBtn))
+                            .addComponent(OptionalResoursesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(LessonTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                        .addComponent(CourseName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(GoBackBtn)
+                .addGap(24, 24, 24))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(LessonTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CourseName)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ContentText, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(QuizBtn)))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OptionalResoursesLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(GoBackBtn)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuizBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_QuizBtnActionPerformed
-        if (lesson.getQuestions().size()==0) {
+        Quiz q= this.lesson.generateQuiz(student);
+        if (q==null) {
             JOptionPane.showMessageDialog(this, "No quiz available for this lesson.");
             return;
         }
-        Quiz q= this.lesson.GenerateQuiz(student);
         if(q.getStudentAttempts() >=q.getMaxNumberofAttempts()){
             JOptionPane.showMessageDialog(this, "You have reached the maximum number of attempts for this quiz.");
             return;

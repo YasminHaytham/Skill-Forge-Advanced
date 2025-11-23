@@ -1,45 +1,187 @@
 {
     "Instructors": [{
         "CreatedCourses": [
-            "C7650",
-            "C3349",
-            "C5885"
+            "C3981",
+            "C3099",
+            "C5767"
         ],
         "role": "Instructor",
-        "userId": "2940",
-        "email": "yasmin@gmail.com",
-        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-        "username": "yasmin"
+        "userId": "2870",
+        "email": "f@gmail.com",
+        "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+        "username": "farah"
     }],
     "Students": [{
         "Progress": [
             {
-                "courseId": "C7650",
-                "lessonIds": [
-                    "L6729",
-                    "L9698"
-                ]
+                "certificate": {
+                    "studentId": "4522",
+                    "certificateId": "CER4959",
+                    "issueDate": "2025-11-23",
+                    "courseId": "C3981"
+                },
+                "lessonQuizs": [
+                    {
+                        "quiz": {
+                            "studentScores": [
+                                0,
+                                5,
+                                0
+                            ],
+                            "studentAttempts": 3,
+                            "questions": [
+                                {
+                                    "options": [
+                                        "a",
+                                        "c",
+                                        "sd",
+                                        "as"
+                                    ],
+                                    "correctAnswer": "a",
+                                    "questionText": "Enter question 1 here"
+                                },
+                                {
+                                    "options": [
+                                        "sa",
+                                        "sd",
+                                        "das",
+                                        "das"
+                                    ],
+                                    "correctAnswer": "sa",
+                                    "questionText": "Enter question 2 here"
+                                },
+                                {
+                                    "options": [
+                                        "ds",
+                                        "sd",
+                                        "sd",
+                                        "sd"
+                                    ],
+                                    "correctAnswer": "ds",
+                                    "questionText": "Enter question 3 here"
+                                },
+                                {
+                                    "options": [
+                                        "ds",
+                                        "dsf",
+                                        "df",
+                                        "dff"
+                                    ],
+                                    "correctAnswer": "ds",
+                                    "questionText": "Enter question 4 here"
+                                },
+                                {
+                                    "options": [
+                                        "sdf",
+                                        "vf",
+                                        "fr",
+                                        "rg"
+                                    ],
+                                    "correctAnswer": "sdf",
+                                    "questionText": "Enter question 5 here"
+                                }
+                            ],
+                            "QuizId": "Q5744_L0471",
+                            "passed": true
+                        },
+                        "lessonId": "L0471",
+                        "completed": true
+                    },
+                    {
+                        "quiz": {
+                            "studentScores": [5],
+                            "studentAttempts": 1,
+                            "questions": [
+                                {
+                                    "options": [
+                                        "qew",
+                                        "eqwe",
+                                        "de",
+                                        "eds"
+                                    ],
+                                    "correctAnswer": "eqwe",
+                                    "questionText": "Enter question 1 here"
+                                },
+                                {
+                                    "options": [
+                                        "fe",
+                                        "fef",
+                                        "sef",
+                                        "fg"
+                                    ],
+                                    "correctAnswer": "sef",
+                                    "questionText": "Enter question 2 here"
+                                },
+                                {
+                                    "options": [
+                                        "hfh",
+                                        "fhg",
+                                        "hg",
+                                        "d"
+                                    ],
+                                    "correctAnswer": "fhg",
+                                    "questionText": "Enter question 3 here"
+                                },
+                                {
+                                    "options": [
+                                        "ht",
+                                        "h n",
+                                        "tn",
+                                        "fth"
+                                    ],
+                                    "correctAnswer": "tn",
+                                    "questionText": "Enter question 4 here"
+                                },
+                                {
+                                    "options": [
+                                        "h",
+                                        "hf",
+                                        "fd",
+                                        "df"
+                                    ],
+                                    "correctAnswer": "hf",
+                                    "questionText": "Enter question 5 here"
+                                }
+                            ],
+                            "QuizId": "Q8984_L1429",
+                            "passed": true
+                        },
+                        "lessonId": "L1429",
+                        "completed": true
+                    }
+                ],
+                "completed": true,
+                "courseId": "C3981"
             },
             {
-                "courseId": "C3349",
-                "lessonIds": ["L8692"]
+                "certificate": null,
+                "lessonQuizs": [],
+                "completed": false,
+                "courseId": "C3099"
+            },
+            {
+                "certificate": null,
+                "lessonQuizs": [],
+                "completed": false,
+                "courseId": "C5767"
             }
         ],
         "role": "Student",
-        "userId": "4222",
+        "userId": "4522",
         "EnrolledCourses": [
-            "C7650",
-            "C3349"
+            "C3981",
+            "C3099",
+            "C5767"
         ],
-        "email": "yasmin2@gmail.com",
-        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-        "username": "yazo"
+        "email": "f1@gmail.com",
+        "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+        "username": "farah"
     }],
-    "Admins":[{
-        "username":"",
-        "email":"",
-        "passwordHash":"",
-        "role":"Admin",
-        "userId":"1234"
+    "Admins": [{
+        "role": "Admin",
+        "userId": "1234",
+        "email": "ad@gmail.com",
+        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+        "username": "Admin1234"
     }]
 }

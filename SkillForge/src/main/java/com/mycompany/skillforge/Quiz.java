@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class Quiz {
 
-    private String QuizId;
+  private String QuizId;
     private List<Question> questions;
     private static final int MaxNumberofAttempts = 3;
     private int score;
@@ -22,9 +22,9 @@ public class Quiz {
         this.score = 0;
         this.studentAttempts = 0;
         this.passed = false;
+        this.studentScores = new ArrayList<>();
     }
-
-    public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
+      public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
             boolean passed) {
         QuizId = quizId;
         this.questions = questions;
@@ -34,6 +34,72 @@ public class Quiz {
         this.score = 0;
     }
 
+    public Quiz(String quizId) {
+        this.questions = new ArrayList<>();
+        this.studentScores = new ArrayList<>();
+        this.studentAttempts = 0;
+        this.score = 0;
+        this.passed = false;
+    }
+    
+    public List<Question> getQuestions() { 
+        return questions; 
+    }
+    
+    public int getStudentAttempts() { 
+        return studentAttempts; 
+    }
+    
+    public int getMaxNumberOfAttempts() { 
+        return MaxNumberofAttempts; 
+    }
+    
+    public void setQuizId(String quizId) { 
+        this.QuizId = quizId; 
+    }
+    
+    public void setQuestions(List<Question> questions) { 
+        this.questions = questions; 
+    }
+
+   
+    public boolean addQuestion(Question question) {
+        if (questions.size() >= 5) {
+            return false; 
+        }
+        
+     /*   if (!question.isValid()) {
+            return false; 
+        }
+            */ 
+        
+        questions.add(question);
+        return true;
+    }
+
+   
+    public boolean removeQuestion(int index) {
+        if (index >= 0 && index < questions.size()) {
+            questions.remove(index);
+            return true;
+        }
+        return false;
+    }
+
+   
+   /*  public boolean updateQuestion(int index, Question newQuestion) {
+        if (index >= 0 && index < questions.size() && newQuestion.isValid()) {
+            questions.set(index, newQuestion);
+            return true;
+        }
+        return false;
+    }
+*/
+    
+    public void clearQuestions() {
+        questions.clear();
+    }
+  
     public String getQuizId() {
         return this.QuizId;
     }
@@ -46,20 +112,12 @@ public class Quiz {
         this.questions = questions;
     }
 
-    public int getStudentAttempts() {
-        return studentAttempts;
-    }
-
     public int getMaxNumberofAttempts() {
         return MaxNumberofAttempts;
     }
 
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public List<Integer> getStudentScores() {
@@ -72,12 +130,6 @@ public class Quiz {
 
     public void addStudentScore(int score) {
         this.studentScores.add(score);
-    }
-
-    public void incrementAttempts() {
-        if (studentAttempts < MaxNumberofAttempts) {
-            studentAttempts++;
-        }
     }
 
     public void calculatePassStatus() {
@@ -93,13 +145,84 @@ public class Quiz {
         calculatePassStatus();
     }
 
+
+    public void incrementAttempts() {
+        if (studentAttempts < MaxNumberofAttempts) {
+            studentAttempts++;
+        }
+    }
+
+
+    public boolean hasAttemptsRemaining() {
+        return studentAttempts < MaxNumberofAttempts;
+    }
+
+ 
+    public int getRemainingAttempts() {
+        return MaxNumberofAttempts - studentAttempts;
+    }
+
+    // Validate that quiz has exactly 5 questions with 4 options each
+   /* public boolean isValid() {
+        if (questions == null || questions.size() != 5) {
+            return false;
+        }
+        
+        // Check that each question has exactly 4 options
+        for (Question question : questions) {
+            if (!question.isValid()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    // Get detailed validation message
+    public String getValidationMessage() {
+        if (questions == null) {
+            return "Quiz has no questions";
+        }
+        if (questions.size() != 5) {
+            return "Quiz must have exactly 5 questions. Currently has " + questions.size();
+        }
+        
+        // Check each question
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            if (!question.isValid()) {
+                return "Question " + (i + 1) + " is invalid: " + question.getValidationMessage();
+            }
+        }
+        return "Valid - 5 questions with 4 options each";
+    }
+
+ */
+    public int getQuestionCount() {
+        return questions != null ? questions.size() : 0;
+    }
+
+   
+    public boolean isEmpty() {
+        return questions == null || questions.isEmpty();
+    }
+
+    
+    public void resetAttempts() {
+        studentAttempts = 0;
+        passed = false;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public boolean isPassed() {
         return passed;
     }
 
     public static Quiz fromJsonObject(JSONObject jsonObject) {
         String QuizId = jsonObject.getString("QuizId");
-        int studentAttempts = jsonObject.getInt("studentAttemptts");
+        int studentAttempts = jsonObject.getInt("studentAttempts");
         boolean passed = jsonObject.getBoolean("passed");
         List<Question> questions = new ArrayList<>();
         if (jsonObject.has("questions")) {
@@ -141,3 +264,4 @@ public class Quiz {
     }
 
 }
+
