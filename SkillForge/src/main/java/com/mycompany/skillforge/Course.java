@@ -20,7 +20,7 @@ public class Course {
     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
     private Random random = new Random();
 
-    public Course(String courseId, String title, String description, String instructorId ) {
+    public Course(String courseId, String title, String description, String instructorId) {
         this.courseId = courseId;
         this.title = title;
         this.description = description;
@@ -48,7 +48,7 @@ public class Course {
 
     public boolean isRejected() {
         this.isCompleted = false;
-        this.status = "Pending";
+        this.status = "PENDING";
         return "REJECTED".equals(status);
     }
 
@@ -63,11 +63,15 @@ public class Course {
         this.isCompleted = isCompleted;
         this.status = status;
     }
+
     public String getCourseId() {
         return courseId;
     }
 
     public void setCompleted(boolean isCompleted) {
+        if (isCompleted) {
+            return;
+        }
         this.isCompleted = isCompleted;
     }
 
@@ -77,8 +81,8 @@ public class Course {
 
     public String getTitle() {
         return title;
-    } 
-    
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -120,28 +124,20 @@ public class Course {
     }
 
     public void Approve() {
-        this.status = "Approved";
+        this.status = "APPROVED";
         dbManager.updateCourse(this);
     }
 
     public void Decline() {
-        this.status = "Declined";
+        this.status = "DECLINED";
         dbManager.updateCourse(this);
     }
 
+    public boolean isDeclined() {
+        return "DECLINED".equals(this.status);
+    }
+
     public List<Student> getStudentsObjects() {
-    public boolean isApproved() {
-    return "Approved".equals(this.status);
-}
-
-public boolean isPending() {
-    return "Pending".equals(this.status);
-}
-
-public boolean isDeclined() {
-    return "Declined".equals(this.status);
-}
-    public List <Student> getStudentsObjects() {
         List<Student> students = new ArrayList<>();
         List<Student> allStudents = dbManager.getAllStudents();
         for (String studentId : studentIDs) {
@@ -153,8 +149,12 @@ public boolean isDeclined() {
         }
         return students;
     }
-    // Methods to manage students
-    // adding and removing students from the course
+
+    public void markAsCompleted() {
+        this.isCompleted = true;
+    }
+// Methods to manage students
+// adding and removing students from the course
 
     public boolean isStudentEnrolled(Student student) {
         return studentIDs.contains(student.getUserId());
@@ -233,7 +233,7 @@ public boolean isDeclined() {
             }
 
         }
-        Course course = new Course(courseId, title, description, instructorId , lessons , studentIDs , isCompleted , status );
+        Course course = new Course(courseId, title, description, instructorId, lessons, studentIDs, isCompleted, status);
         return course;
     }
 
@@ -243,9 +243,9 @@ public boolean isDeclined() {
         jsonObject.put("title", this.title);
         jsonObject.put("description", this.description);
         jsonObject.put("instructorId", this.instructorId);
-        jsonObject.put("isCompleted",this.isCompleted);
-         jsonObject.put("status",this.status);
-        
+        jsonObject.put("isCompleted", this.isCompleted);
+        jsonObject.put("status", this.status);
+
         JSONArray lessonsArray = new JSONArray();
         for (Lesson lesson : this.lessons) {
             lessonsArray.put(lesson.toJsonObject());
@@ -287,4 +287,9 @@ public boolean isDeclined() {
 
         return (double) completedCount / studentIDs.size() * 100;
     }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+    
 }

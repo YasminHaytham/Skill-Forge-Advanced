@@ -80,8 +80,10 @@ public class Student extends User {
     }
 
     public void addCompletedLesson(Lesson lesson) {
+        Progress pro= null;
         for (Progress p : progress) {
             if (p.getCourseId().equals(lesson.getCourseId())) {
+                pro=p;
                 for (LessonQuiz lq : p.getLessonQuizs()) {
                     if (lq.getLessonId().equals(lesson.getLessonId())) {
                         lq.MarkCompletedLessonQuiz();
@@ -89,6 +91,14 @@ public class Student extends User {
                 }
             }
         }
+        if ( pro != null)
+        {
+            if (pro.isCourseCompleted())
+            {
+                pro.checkAndGenerateCertificate(this.userId);
+            }
+        }
+
         dbManager.updateStudent(this);
     }
 
@@ -130,6 +140,24 @@ public class Student extends User {
             }
         }
         return completedLessons;
+    }
+    public boolean hasCertificate(Course course) {
+    return getCertificate(course) != null;
+}
+
+    public Certificate getCertificate(Course course)
+    {
+        for ( Progress p : progress)
+        {
+            if ( p.getCourseId().equals(course.getCourseId()))
+            {
+                if(p.getCertificate()!=null)
+                {
+                    return p.getCertificate();
+                }
+            }
+        }
+        return null;
     }
 
     public static Student fromJsonObject(JSONObject jsonObject) {

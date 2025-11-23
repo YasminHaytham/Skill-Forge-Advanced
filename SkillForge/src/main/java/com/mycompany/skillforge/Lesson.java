@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Lesson {
@@ -75,22 +76,25 @@ public class Lesson {
         return this.questions;
     }
 
-    public Quiz GenerateQuiz(Student student) {
-        for (Progress p : student.getProgress()) {
-            if (p.getCourseId().equals(this.courseId)) {
-                for (LessonQuiz lq : p.getLessonQuizs()) {
-                    if (lq.getLessonId().equals(this.lessonId)) {
-                        return lq.getQuiz();
+     public Quiz generateQuiz(Student student) {
+        for (Progress progress : student.getProgress()) {
+            if (progress.getCourseId().equals(this.courseId)) {
+                for (LessonQuiz lessonQuiz : progress.getLessonQuizs()) {
+                    if (lessonQuiz.getLessonId().equals(this.lessonId) && lessonQuiz.getQuiz() != null) {
+                        return lessonQuiz.getQuiz();
                     }
                 }
             }
         }
 
-        String quizId = String.format("%03d", random.nextInt(10000)) + this.lessonId + "_quiz";
-        Quiz newQuiz = new Quiz(quizId, this.questions);
-        student.addLessonQuiz(this.courseId, this.lessonId,newQuiz);
-        return newQuiz;
-
+        if (this.questions != null && !this.questions.isEmpty()) {
+            String quizId = "Q" + String.format("%04d", random.nextInt(10000)) + "_" + this.lessonId;
+            Quiz newQuiz = new Quiz(quizId, new ArrayList<>(this.questions));
+            student.addLessonQuiz(this.courseId, this.lessonId, newQuiz);
+            return newQuiz;
+        }
+        
+        return null;
     }
 
 
@@ -112,7 +116,17 @@ public class Lesson {
         jsonObject.put("lessonId", this.lessonId);
         jsonObject.put("title", this.title);
         jsonObject.put("content", this.content);
-        jsonObject.put("OpResources", this.OpResources);
+       JSONArray resourcesArray = new JSONArray();
+        for (String resource : OpResources) {
+            resourcesArray.put(resource);
+        }
+        jsonObject.put("opResources", resourcesArray);
+        JSONArray questionsArray = new JSONArray();
+        for (Question question : this.questions) {
+            questionsArray.put(question.toJsonObject());
+        }
+        jsonObject.put("questions", questionsArray);
+
         return jsonObject;
     }
 
@@ -129,6 +143,16 @@ public class Lesson {
             }
         }
         lesson.OpResources = resources;
+          if (jsonObject.has("questions")) {
+            JSONArray questionsArray = jsonObject.getJSONArray("questions");
+            List<Question> questions = new ArrayList<>();
+            for (int i = 0; i < questionsArray.length(); i++) {
+                JSONObject questionJson = questionsArray.getJSONObject(i);
+                Question question = Question.fromJsonObject(questionJson);
+                questions.add(question);
+            }
+            lesson.setQuestions(questions);
+        }
         return lesson;
     }
 

@@ -2,8 +2,6 @@ package com.mycompany.skillforge;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,6 +22,16 @@ public class Quiz {
         this.score = 0;
         this.studentAttempts = 0;
         this.passed = false;
+        this.studentScores = new ArrayList<>();
+    }
+      public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
+            boolean passed) {
+        QuizId = quizId;
+        this.questions = questions;
+        this.studentScores = studentScores;
+        this.studentAttempts = studentAttempts;
+        this.passed = passed;
+        this.score = 0;
     }
 
     public Quiz(String quizId) {
@@ -32,11 +40,6 @@ public class Quiz {
         this.studentAttempts = 0;
         this.score = 0;
         this.passed = false;
-    }
-
-    // Getters and setters
-    public String getQuizId() { 
-        return QuizId; 
     }
     
     public List<Question> getQuestions() { 
@@ -95,16 +98,8 @@ public class Quiz {
     
     public void clearQuestions() {
         questions.clear();
-    public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
-            boolean passed) {
-        QuizId = quizId;
-        this.questions = questions;
-        this.studentScores = studentScores;
-        this.studentAttempts = studentAttempts;
-        this.passed = passed;
-        this.score = 0;
     }
-
+  
     public String getQuizId() {
         return this.QuizId;
     }
@@ -227,7 +222,7 @@ public class Quiz {
 
     public static Quiz fromJsonObject(JSONObject jsonObject) {
         String QuizId = jsonObject.getString("QuizId");
-        int studentAttempts = jsonObject.getInt("studentAttemptts");
+        int studentAttempts = jsonObject.getInt("studentAttempts");
         boolean passed = jsonObject.getBoolean("passed");
         List<Question> questions = new ArrayList<>();
         if (jsonObject.has("questions")) {
@@ -269,3 +264,4 @@ public class Quiz {
     }
 
 }
+
