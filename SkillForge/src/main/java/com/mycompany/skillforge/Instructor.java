@@ -80,60 +80,85 @@ public JSONObject toJsonObject() {
 }
 
 public Map<String, Object> getCourseAnalytics(String courseId) {
-        Map<String, Object> analytics = new HashMap<>();
-        Course course = dbManager.getCourseById(courseId);
+    Map<String, Object> analytics = new HashMap<>();
+    Course course = dbManager.getCourseById(courseId);
+    
+    if (course != null) {
+        // Student completion rates
+        List<Student> enrolledStudents = dbManager.getStudentsByIds(course.getStudentIDs());
+        int totalStudents = enrolledStudents.size();
+        int completedStudents = 0;
         
-        if (course != null) {
-            // Student completion rates
-            List<Student> enrolledStudents = dbManager.getStudentsByIds(course.getStudentIDs());
-            int totalStudents = enrolledStudents.size();
-            int completedStudents = 0;
+        // Quiz averages per lesson
+        Map<String, Double> lessonQuizAverages = new HashMap<>();
+        Map<String, Integer> lessonCompletion = new HashMap<>();
+        
+        for (Lesson lesson : course.getLessons()) {
+            double totalScore = 0;
+            int attemptCount = 0;
+            int completedCount = 0;
             
-            // Quiz averages per lesson
-            Map<String, Double> lessonQuizAverages = new HashMap<>();
-            Map<String, Integer> lessonCompletion = new HashMap<>();
-            
-            for (Lesson lesson : course.getLessons()) {
-                double totalScore = 0;
-                int attemptCount = 0;
-                int completedCount = 0;
+            for (Student student : enrolledStudents) {
+                // Check if student completed this lesson's quiz
+                boolean lessonCompleted = false;
+                double lessonScore = 0;
                 
-                for (Student student : enrolledStudents) {
-                    QuizResult result = student.getQuizResult(courseId, lesson.getLessonId());
-                    if (result != null) {
-                        totalScore += result.getScore();
-                        attemptCount++;
-                        if (result.isPassed()) {
-                            completedCount++;
+                // Look through student's progress to find quiz data
+                for (Progress progress : student.getProgress()) {
+                    if (progress.getCourseId().equals(courseId)) {
+                        for (LessonQuiz lessonQuiz : progress.getLessonQuizs()) {
+                            if (lessonQuiz.getLessonId().equals(lesson.getLessonId()) && lessonQuiz.isCompleted()) {
+                                lessonCompleted = true;
+                                completedCount++;
+                                
+                                // Calculate average score from studentScores
+                                Quiz quiz = lessonQuiz.getQuiz();
+                                if (quiz != null && !quiz.getStudentScores().isEmpty()) {
+                                    for (int score : quiz.getStudentScores()) {
+                                        totalScore += score;
+                                        attemptCount++;
+                                    }
+                                }
+                                break;
+                            }
                         }
                     }
                 }
-                
-                double averageScore = attemptCount > 0 ? totalScore / attemptCount : 0;
-                double completionRate = totalStudents > 0 ? (double) completedCount / totalStudents * 100 : 0;
-                
-                lessonQuizAverages.put(lesson.getTitle(), averageScore);
-                lessonCompletion.put(lesson.getTitle(), completedCount);
             }
             
-            // Overall course completion
-            for (Student student : enrolledStudents) {
-                if (student.hasCompletedCourse(courseId)) {
-                    completedStudents++;
-                }
-            }
+            // Calculate averages
+            double averageScore = attemptCount > 0 ? totalScore / attemptCount : 0;
+            double completionRate = totalStudents > 0 ? (double) completedCount / totalStudents * 100 : 0;
             
-            double courseCompletionRate = totalStudents > 0 ? (double) completedStudents / totalStudents * 100 : 0;
-            
-            analytics.put("totalStudents", totalStudents);
-            analytics.put("completedStudents", completedStudents);
-            analytics.put("courseCompletionRate", courseCompletionRate);
-            analytics.put("lessonQuizAverages", lessonQuizAverages);
-            analytics.put("lessonCompletion", lessonCompletion);
+            lessonQuizAverages.put(lesson.getTitle(), averageScore);
+            lessonCompletion.put(lesson.getTitle(), completedCount);
         }
         
-        return analytics;
+        // Overall course completion
+        for (Student student : enrolledStudents) {
+            if (student.hasCompletedCourse(courseId)) {
+                completedStudents++;
+            }
+        }
+        
+        double courseCompletionRate = totalStudents > 0 ? (double) completedStudents / totalStudents * 100 : 0;
+        
+        analytics.put("totalStudents", totalStudents);
+        analytics.put("completedStudents", completedStudents);
+        analytics.put("courseCompletionRate", courseCompletionRate);
+        analytics.put("lessonQuizAverages", lessonQuizAverages);
+        analytics.put("lessonCompletion", lessonCompletion);
+    } else {
+        // Return empty analytics if course not found
+        analytics.put("totalStudents", 0);
+        analytics.put("completedStudents", 0);
+        analytics.put("courseCompletionRate", 0.0);
+        analytics.put("lessonQuizAverages", new HashMap<String, Double>());
+        analytics.put("lessonCompletion", new HashMap<String, Integer>());
     }
+    
+    return analytics;
+}
 
     public String getCourseApprovalStatus(String courseId) {
         Course course = dbManager.getCourseById(courseId);

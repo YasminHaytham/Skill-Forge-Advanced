@@ -4,221 +4,244 @@
  */
 package com.mycompany.skillforge;
 
-import java.util.HashSet;
+import java.awt.BorderLayout;
 import java.util.Map;
-import javax.swing.JTextArea;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.JTextArea;
 
-/**
- *
- * @author User
- */
 public class InstructorInsights extends javax.swing.JFrame {
-
     private Map<String, Object> analytics;
     private String courseTitle;
     private JTabbedPane tabbedPane;
-    private JPanel chartPanel;
-    private JPanel textPanel;
-    
-    /**
-     * Creates new form InstructorInsights with analytics data
-     */
+
     public InstructorInsights(Map<String, Object> analytics, String courseTitle) {
         this.analytics = analytics;
         this.courseTitle = courseTitle;
         initComponents();
         createTabbedInterface();
         displayAnalytics();
-        displayCharts();
     }
+
+public InstructorInsights() {
+    initComponents();
+    createTabbedInterface();
+    if (analyticsTextArea != null) {
+        analyticsTextArea.setText("No analytics data available. Please select a course with student activity.");
+    }
+}
+
+private void createTabbedInterface() {
+    // Remove the default NetBeans layout completely
+    getContentPane().removeAll();
     
-    /**
-     * Default constructor (keep for NetBeans compatibility)
-     */
-     public InstructorInsights() {
-        initComponents();
-        createTabbedInterface();
-    }
-        private void createTabbedInterface() {
-        // Remove existing components
-        getContentPane().removeAll();
-        
-        // Create tabbed pane
-        tabbedPane = new JTabbedPane();
-        
-        // Create text analytics panel
-        textPanel = new JPanel(new BorderLayout());
-        textPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        analyticsTextArea = new javax.swing.JTextArea();
-        
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14));
-        jLabel1.setText("Course Analytics - " + courseTitle);
-        
-        analyticsTextArea.setEditable(false);
-        analyticsTextArea.setColumns(50);
-        analyticsTextArea.setLineWrap(true);
-        analyticsTextArea.setRows(20);
-        analyticsTextArea.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
-        jScrollPane1.setViewportView(analyticsTextArea);
-        
-        textPanel.add(jLabel1, BorderLayout.NORTH);
-        textPanel.add(jScrollPane1, BorderLayout.CENTER);
-        
-        // Create charts panel
-        chartPanel = new JPanel(new BorderLayout());
+    // Create tabbed pane
+    tabbedPane = new JTabbedPane();
+    
+    // Create text analytics panel
+    JPanel textPanel = createTextPanel();
+    
+    // Create charts panel (simplified for now)
+    JPanel chartPanel = createChartPanel();
+    
+    // Add tabs
+    tabbedPane.addTab("Text Analytics", textPanel);
+    tabbedPane.addTab("Visual Charts", chartPanel);
+    
+    // Create a main panel to hold both tabs and close button
+    JPanel mainPanel = new JPanel(new BorderLayout());
+    mainPanel.add(tabbedPane, BorderLayout.CENTER);
+    mainPanel.add(closeBtn, BorderLayout.SOUTH);  // Add the close button
+    
+    // Layout
+    getContentPane().setLayout(new BorderLayout());
+    getContentPane().add(mainPanel, BorderLayout.CENTER);
+    
+    setTitle("Course Insights - " + (courseTitle != null ? courseTitle : "SkillForge"));
+    pack();
+    setLocationRelativeTo(null);
+    setSize(700, 500);
+}
+private JPanel createTextPanel() {
+    JPanel textPanel = new JPanel(new BorderLayout());
+    textPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    
+    // Use the existing analyticsTextArea from NetBeans but reconfigure it
+    analyticsTextArea.setLineWrap(true);
+    analyticsTextArea.setWrapStyleWord(true);
+    analyticsTextArea.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+    
+    // Create a new scroll pane for the text area
+    JScrollPane scrollPane = new JScrollPane(analyticsTextArea);
+    textPanel.add(scrollPane, BorderLayout.CENTER);
+    
+    return textPanel;
+}
+
+    private JPanel createChartPanel() {
+        JPanel chartPanel = new JPanel(new BorderLayout());
         chartPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        // Add tabs
-        tabbedPane.addTab("Text Analytics", textPanel);
-        tabbedPane.addTab("Visual Charts", chartPanel);
+        if (analytics == null || analytics.isEmpty()) {
+            JTextArea noDataLabel = new JTextArea("No chart data available.\n\n"
+                    + "Charts will appear here when:\n"
+                    + "- Students enroll in the course\n"
+                    + "- Quizzes are attempted\n"
+                    + "- Lesson completion data is available");
+            noDataLabel.setEditable(false);
+            noDataLabel.setOpaque(false);
+            noDataLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            chartPanel.add(noDataLabel, BorderLayout.CENTER);
+        } else {
+            createSimpleCharts(chartPanel);
+        }
         
-        // Add close button
-        closeBtn = new javax.swing.JButton();
-        closeBtn.setText("Close");
-        closeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeBtnActionPerformed(evt);
-            }
-        });
-        
-        // Layout
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(tabbedPane, BorderLayout.CENTER);
-        getContentPane().add(closeBtn, BorderLayout.SOUTH);
-        
-        pack();
+        return chartPanel;
     }
-    
-       private void displayAnalytics() {
-        if (analytics == null) return;
+
+    private void displayAnalytics() {
+        if (analytics == null || analytics.isEmpty()) {
+            analyticsTextArea.setText("No analytics data available for this course.\n\n"
+                    + "This could be because:\n"
+                    + "- No students are enrolled\n"
+                    + "- No quizzes have been taken\n"
+                    + "- The course is new\n\n"
+                    + "Analytics will appear when students start taking quizzes.");
+            return;
+        }
         
         StringBuilder sb = new StringBuilder();
-        sb.append("=== COURSE ANALYTICS ===\n\n");
+        sb.append("=== COURSE ANALYTICS: ").append(courseTitle).append(" ===\n\n");
         
-        sb.append("Total Students: ").append(analytics.get("totalStudents")).append("\n");
-        sb.append("Completed Students: ").append(analytics.get("completedStudents")).append("\n");
-        sb.append("Completion Rate: ").append(String.format("%.1f%%", analytics.get("courseCompletionRate"))).append("\n\n");
+        // Safely get values with defaults
+        int totalStudents = getIntValue("totalStudents", 0);
+        int completedStudents = getIntValue("completedStudents", 0);
+        double completionRate = getDoubleValue("courseCompletionRate", 0.0);
         
-        sb.append("=== LESSON QUIZ AVERAGES ===\n");
-        Map<String, Double> quizAverages = (Map<String, Double>) analytics.get("lessonQuizAverages");
-        if (quizAverages != null) {
-            for (Map.Entry<String, Double> entry : quizAverages.entrySet()) {
-                sb.append(entry.getKey()).append(": ").append(String.format("%.1f/100", entry.getValue())).append("\n");
-            }
-        }
+        sb.append("Total Students: ").append(totalStudents).append("\n");
+        sb.append("Completed Students: ").append(completedStudents).append("\n");
+        sb.append("Completion Rate: ").append(String.format("%.1f%%", completionRate)).append("\n\n");
         
-        sb.append("\n=== LESSON COMPLETION ===\n");
-        Map<String, Integer> lessonCompletion = (Map<String, Integer>) analytics.get("lessonCompletion");
-        int totalStudents = (int) analytics.get("totalStudents");
-        if (lessonCompletion != null) {
-            for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
-                double completionRate = totalStudents > 0 ? (double) entry.getValue() / totalStudents * 100 : 0;
-                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("/")
-                  .append(totalStudents).append(" (").append(String.format("%.1f%%", completionRate)).append(")\n");
-            }
-        }
+        // Lesson quiz averages
+        displayQuizAverages(sb);
+        
+        // Lesson completion
+        displayLessonCompletion(sb, totalStudents);
         
         analyticsTextArea.setText(sb.toString());
     }
-    private void displayCharts() {
-        if (analytics == null) return;
-        
-        chartPanel.removeAll();
-        
+    
+    private int getIntValue(String key, int defaultValue) {
         try {
-            // Try to use JFreeChart if available
-            createJFreeCharts();
-        } catch (NoClassDefFoundError e) {
-            // Fallback to simple Java2D charts
-            createSimpleCharts();
+            Object value = analytics.get(key);
+            return value != null ? (int) value : defaultValue;
+        } catch (Exception e) {
+            return defaultValue;
         }
-        
-        chartPanel.revalidate();
-        chartPanel.repaint();
     }
     
-    private void createJFreeCharts() {
-        // This will only work if JFreeChart is in classpath
+    private double getDoubleValue(String key, double defaultValue) {
+        try {
+            Object value = analytics.get(key);
+            return value != null ? (double) value : defaultValue;
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+    
+    private void displayQuizAverages(StringBuilder sb) {
+        sb.append("=== LESSON QUIZ AVERAGES ===\n");
+        try {
+            Map<String, Double> quizAverages = (Map<String, Double>) analytics.get("lessonQuizAverages");
+            if (quizAverages != null && !quizAverages.isEmpty()) {
+                for (Map.Entry<String, Double> entry : quizAverages.entrySet()) {
+                    sb.append("• ").append(entry.getKey()).append(": ")
+                      .append(String.format("%.1f/5", entry.getValue())).append("\n");
+                }
+            } else {
+                sb.append("No quiz data available\n");
+            }
+        } catch (Exception e) {
+            sb.append("Error loading quiz data\n");
+        }
+        sb.append("\n");
+    }
+    
+    private void displayLessonCompletion(StringBuilder sb, int totalStudents) {
+        sb.append("=== LESSON COMPLETION ===\n");
+        try {
+            Map<String, Integer> lessonCompletion = (Map<String, Integer>) analytics.get("lessonCompletion");
+            if (lessonCompletion != null && !lessonCompletion.isEmpty()) {
+                for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
+                    double lessonCompletionRate = totalStudents > 0 ? 
+                        ((double) entry.getValue() / totalStudents) * 100 : 0;
+                    sb.append("• ").append(entry.getKey()).append(": ")
+                      .append(entry.getValue()).append("/").append(totalStudents)
+                      .append(" (").append(String.format("%.1f%%", lessonCompletionRate)).append(")\n");
+                }
+            } else {
+                sb.append("No completion data available\n");
+            }
+        } catch (Exception e) {
+            sb.append("Error loading completion data\n");
+        }
+    }
+    
+    private void createSimpleCharts(JPanel chartPanel) {
         Map<String, Double> quizAverages = (Map<String, Double>) analytics.get("lessonQuizAverages");
         Map<String, Integer> lessonCompletion = (Map<String, Integer>) analytics.get("lessonCompletion");
         
         JPanel chartsContainer = new JPanel();
         chartsContainer.setLayout(new BoxLayout(chartsContainer, BoxLayout.Y_AXIS));
         
+        boolean hasCharts = false;
+        
+        // Quiz averages chart
         if (quizAverages != null && !quizAverages.isEmpty()) {
-            JPanel quizChart = SimpleChartUtils.createBarChart(
-                quizAverages, 
-                "Lesson Quiz Averages", 
-                "Lessons", 
-                "Average Score (%)"
-            );
-            quizChart.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-            chartsContainer.add(quizChart);
-        }
-        
-        if (lessonCompletion != null && !lessonCompletion.isEmpty()) {
-            // Convert completion counts to percentages
-            java.util.Map<String, Double> completionPercentages = new java.util.HashMap<>();
-            int totalStudents = (int) analytics.get("totalStudents");
-            
-            for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
-                double percentage = totalStudents > 0 ? 
-                    ((double) entry.getValue() / totalStudents) * 100 : 0;
-                completionPercentages.put(entry.getKey(), percentage);
+            try {
+                SimpleBarChart quizChart = new SimpleBarChart(quizAverages, "Lesson Quiz Averages");
+                quizChart.setBorder(BorderFactory.createTitledBorder("Quiz Scores by Lesson"));
+                quizChart.setPreferredSize(new java.awt.Dimension(500, 300));
+                chartsContainer.add(quizChart);
+                hasCharts = true;
+            } catch (Exception e) {
+                JLabel errorLabel = new JLabel("Error creating quiz chart: " + e.getMessage());
+                chartsContainer.add(errorLabel);
             }
-            
-            JPanel completionChart = SimpleChartUtils.createBarChart(
-                completionPercentages,
-                "Lesson Completion Rates",
-                "Lessons", 
-                "Completion Rate (%)"
-            );
-            completionChart.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-            chartsContainer.add(completionChart);
         }
         
-        JScrollPane scrollPane = new JScrollPane(chartsContainer);
-        chartPanel.add(scrollPane, BorderLayout.CENTER);
-    }
-    
-    private void createSimpleCharts() {
-        Map<String, Double> quizAverages = (Map<String, Double>) analytics.get("lessonQuizAverages");
-        Map<String, Integer> lessonCompletion = (Map<String, Integer>) analytics.get("lessonCompletion");
-        
-        JPanel chartsContainer = new JPanel();
-        chartsContainer.setLayout(new BoxLayout(chartsContainer, BoxLayout.Y_AXIS));
-        
-        if (quizAverages != null && !quizAverages.isEmpty()) {
-            SimpleBarChart quizChart = new SimpleBarChart(quizAverages, "Lesson Quiz Averages");
-            quizChart.setBorder(BorderFactory.createTitledBorder("Quiz Scores by Lesson"));
-            quizChart.setPreferredSize(new java.awt.Dimension(500, 300));
-            chartsContainer.add(quizChart);
-        }
-        
+        // Lesson completion chart
         if (lessonCompletion != null && !lessonCompletion.isEmpty()) {
-            // Convert to percentages for chart
-            java.util.Map<String, Double> completionPercentages = new java.util.HashMap<>();
-            int totalStudents = (int) analytics.get("totalStudents");
-            
-            for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
-                double percentage = totalStudents > 0 ? 
-                    ((double) entry.getValue() / totalStudents) * 100 : 0;
-                completionPercentages.put(entry.getKey(), percentage);
+            try {
+                // Convert to percentages for chart
+                java.util.Map<String, Double> completionPercentages = new java.util.HashMap<>();
+                int totalStudents = (int) analytics.getOrDefault("totalStudents", 1);
+                
+                for (Map.Entry<String, Integer> entry : lessonCompletion.entrySet()) {
+                    double percentage = totalStudents > 0 ? 
+                        ((double) entry.getValue() / totalStudents) * 100 : 0;
+                    completionPercentages.put(entry.getKey(), percentage);
+                }
+                
+                SimpleBarChart completionChart = new SimpleBarChart(completionPercentages, "Lesson Completion Rates");
+                completionChart.setBorder(BorderFactory.createTitledBorder("Completion Rates by Lesson"));
+                completionChart.setPreferredSize(new java.awt.Dimension(500, 300));
+                chartsContainer.add(completionChart);
+                hasCharts = true;
+            } catch (Exception e) {
+                JLabel errorLabel = new JLabel("Error creating completion chart: " + e.getMessage());
+                chartsContainer.add(errorLabel);
             }
-            
-            SimpleBarChart completionChart = new SimpleBarChart(completionPercentages, "Lesson Completion Rates");
-            completionChart.setBorder(BorderFactory.createTitledBorder("Completion Rates by Lesson"));
-            completionChart.setPreferredSize(new java.awt.Dimension(500, 300));
-            chartsContainer.add(completionChart);
+        }
+        
+        if (!hasCharts) {
+            JLabel noChartsLabel = new JLabel("No chart data available from analytics.");
+            noChartsLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            chartsContainer.add(noChartsLabel);
         }
         
         JScrollPane scrollPane = new JScrollPane(chartsContainer);

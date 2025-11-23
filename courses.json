@@ -1,2 +1,129 @@
-{"Courses": []
-}
+{"Courses": [{
+    "StudentIDs": ["4522"],
+    "description": "math1",
+    "title": "math",
+    "courseId": "C3981",
+    "instructorId": "2870",
+    "isCompleted": false,
+    "status": "APPROVED",
+    "lessons": [
+        {
+            "questions": [
+                {
+                    "options": [
+                        "a",
+                        "c",
+                        "sd",
+                        "as"
+                    ],
+                    "correctAnswer": "a",
+                    "questionText": "Enter question 1 here"
+                },
+                {
+                    "options": [
+                        "sa",
+                        "sd",
+                        "das",
+                        "das"
+                    ],
+                    "correctAnswer": "sa",
+                    "questionText": "Enter question 2 here"
+                },
+                {
+                    "options": [
+                        "ds",
+                        "sd",
+                        "sd",
+                        "sd"
+                    ],
+                    "correctAnswer": "ds",
+                    "questionText": "Enter question 3 here"
+                },
+                {
+                    "options": [
+                        "ds",
+                        "dsf",
+                        "df",
+                        "dff"
+                    ],
+                    "correctAnswer": "ds",
+                    "questionText": "Enter question 4 here"
+                },
+                {
+                    "options": [
+                        "sdf",
+                        "vf",
+                        "fr",
+                        "rg"
+                    ],
+                    "correctAnswer": "sdf",
+                    "questionText": "Enter question 5 here"
+                }
+            ],
+            "lessonId": "L0471",
+            "title": "lesson1",
+            "courseId": "C3981",
+            "opResources": [],
+            "content": "lesson1 content"
+        },
+        {
+            "questions": [
+                {
+                    "options": [
+                        "qew",
+                        "eqwe",
+                        "de",
+                        "eds"
+                    ],
+                    "correctAnswer": "eqwe",
+                    "questionText": "Enter question 1 here"
+                },
+                {
+                    "options": [
+                        "fe",
+                        "fef",
+                        "sef",
+                        "fg"
+                    ],
+                    "correctAnswer": "sef",
+                    "questionText": "Enter question 2 here"
+                },
+                {
+                    "options": [
+                        "hfh",
+                        "fhg",
+                        "hg",
+                        "d"
+                    ],
+                    "correctAnswer": "fhg",
+                    "questionText": "Enter question 3 here"
+                },
+                {
+                    "options": [
+                        "ht",
+                        "h n",
+                        "tn",
+                        "fth"
+                    ],
+                    "correctAnswer": "tn",
+                    "questionText": "Enter question 4 here"
+                },
+                {
+                    "options": [
+                        "h",
+                        "hf",
+                        "fd",
+                        "df"
+                    ],
+                    "correctAnswer": "hf",
+                    "questionText": "Enter question 5 here"
+                }
+            ],
+            "lessonId": "L1429",
+            "title": "lesson 2",
+            "courseId": "C3981",
+            "opResources": [],
+            "content": "lesson2 content"
+        }
+    ]
+}]}

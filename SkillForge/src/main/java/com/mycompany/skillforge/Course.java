@@ -48,7 +48,7 @@ public class Course {
 
     public boolean isRejected() {
         this.isCompleted = false;
-        this.status = "Pending";
+        this.status = "PENDING";
         return "REJECTED".equals(status);
     }
 
@@ -124,17 +124,17 @@ public class Course {
     }
 
     public void Approve() {
-        this.status = "Approved";
+        this.status = "APPROVED";
         dbManager.updateCourse(this);
     }
 
     public void Decline() {
-        this.status = "Declined";
+        this.status = "DECLINED";
         dbManager.updateCourse(this);
     }
 
     public boolean isDeclined() {
-        return "Declined".equals(this.status);
+        return "DECLINED".equals(this.status);
     }
 
     public List<Student> getStudentsObjects() {
