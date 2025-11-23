@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class LessonFrame extends javax.swing.JFrame {
     Lesson lesson;
-    Student student;
+    Student student ;
 
     public LessonFrame(Lesson lesson) {
 

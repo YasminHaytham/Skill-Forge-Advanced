@@ -287,4 +287,9 @@ public class Course {
 
         return (double) completedCount / studentIDs.size() * 100;
     }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+    
 }
