@@ -27,7 +27,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -43,6 +42,7 @@
                       <Component id="LessonTitle" alignment="0" pref="147" max="32767" attributes="0"/>
                       <Component id="CourseName" alignment="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jLabel2" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>

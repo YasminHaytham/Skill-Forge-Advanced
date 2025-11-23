@@ -612,8 +612,7 @@ public class QuizFrame extends javax.swing.JFrame {
             if (quiz.isPassed()) {
                 lesson.markAsCompleted(student);
             }
-            else 
-            {
+            else{
                 dbManager.updateStudent(student);
             }
             JOptionPane.showMessageDialog(this,

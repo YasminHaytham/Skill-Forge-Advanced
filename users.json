@@ -1,28 +1,18 @@
 {
-    "Instructors": [
-        {
-            "CreatedCourses": ["C3981"],
-            "role": "Instructor",
-            "userId": "2870",
-            "email": "f@gmail.com",
-            "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
-            "username": "farah"
-        },
-        {
-            "CreatedCourses": [
-                "C3221",
-                "C7102"
-            ],
-            "role": "Instructor",
-            "userId": "3926",
-            "email": "yasmin2@gmail.com",
-            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-            "username": "yasmin"
-        }
-    ],
-    "Students": [
-        {
-            "Progress": [{
+    "Instructors": [{
+        "CreatedCourses": [
+            "C3981",
+            "C3099"
+        ],
+        "role": "Instructor",
+        "userId": "2870",
+        "email": "f@gmail.com",
+        "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+        "username": "farah"
+    }],
+    "Students": [{
+        "Progress": [
+            {
                 "certificate": {
                     "studentId": "4522",
                     "certificateId": "CER4959",
@@ -32,8 +22,12 @@
                 "lessonQuizs": [
                     {
                         "quiz": {
-                            "studentScores": [],
-                            "studentAttempts": 0,
+                            "studentScores": [
+                                0,
+                                5,
+                                0
+                            ],
+                            "studentAttempts": 3,
                             "questions": [
                                 {
                                     "options": [
@@ -87,10 +81,10 @@
                                 }
                             ],
                             "QuizId": "Q5744_L0471",
-                            "passed": false
+                            "passed": true
                         },
                         "lessonId": "L0471",
-                        "completed": false
+                        "completed": true
                     },
                     {
                         "quiz": {
@@ -157,185 +151,24 @@
                 ],
                 "completed": true,
                 "courseId": "C3981"
-            }],
-            "role": "Student",
-            "userId": "4522",
-            "EnrolledCourses": ["C3981"],
-            "email": "f1@gmail.com",
-            "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
-            "username": "farah"
-        },
-        {
-            "Progress": [
-                {
-                    "certificate": {
-                        "studentId": "6209",
-                        "certificateId": "CER3850",
-                        "issueDate": "2025-11-23",
-                        "courseId": "C3981"
-                    },
-                    "lessonQuizs": [
-                        {
-                            "quiz": {
-                                "studentScores": [
-                                    0,
-                                    2,
-                                    5
-                                ],
-                                "studentAttempts": 3,
-                                "questions": [
-                                    {
-                                        "options": [
-                                            "a",
-                                            "c",
-                                            "sd",
-                                            "as"
-                                        ],
-                                        "correctAnswer": "a",
-                                        "questionText": "Enter question 1 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "sa",
-                                            "sd",
-                                            "das",
-                                            "das"
-                                        ],
-                                        "correctAnswer": "sa",
-                                        "questionText": "Enter question 2 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "ds",
-                                            "sd",
-                                            "sd",
-                                            "sd"
-                                        ],
-                                        "correctAnswer": "ds",
-                                        "questionText": "Enter question 3 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "ds",
-                                            "dsf",
-                                            "df",
-                                            "dff"
-                                        ],
-                                        "correctAnswer": "ds",
-                                        "questionText": "Enter question 4 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "sdf",
-                                            "vf",
-                                            "fr",
-                                            "rg"
-                                        ],
-                                        "correctAnswer": "sdf",
-                                        "questionText": "Enter question 5 here"
-                                    }
-                                ],
-                                "QuizId": "Q4487_L0471",
-                                "passed": true
-                            },
-                            "lessonId": "L0471",
-                            "completed": true
-                        },
-                        {
-                            "quiz": {
-                                "studentScores": [5],
-                                "studentAttempts": 1,
-                                "questions": [
-                                    {
-                                        "options": [
-                                            "qew",
-                                            "eqwe",
-                                            "de",
-                                            "eds"
-                                        ],
-                                        "correctAnswer": "eqwe",
-                                        "questionText": "Enter question 1 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "fe",
-                                            "fef",
-                                            "sef",
-                                            "fg"
-                                        ],
-                                        "correctAnswer": "sef",
-                                        "questionText": "Enter question 2 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "hfh",
-                                            "fhg",
-                                            "hg",
-                                            "d"
-                                        ],
-                                        "correctAnswer": "fhg",
-                                        "questionText": "Enter question 3 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "ht",
-                                            "h n",
-                                            "tn",
-                                            "fth"
-                                        ],
-                                        "correctAnswer": "tn",
-                                        "questionText": "Enter question 4 here"
-                                    },
-                                    {
-                                        "options": [
-                                            "h",
-                                            "hf",
-                                            "fd",
-                                            "df"
-                                        ],
-                                        "correctAnswer": "hf",
-                                        "questionText": "Enter question 5 here"
-                                    }
-                                ],
-                                "QuizId": "Q3041_L1429",
-                                "passed": true
-                            },
-                            "lessonId": "L1429",
-                            "completed": true
-                        }
-                    ],
-                    "completed": true,
-                    "courseId": "C3981"
-                },
-                {
-                    "certificate": null,
-                    "lessonQuizs": [{
-                        "quiz": null,
-                        "lessonId": "L8135",
-                        "completed": false
-                    }],
-                    "completed": false,
-                    "courseId": "C3221"
-                },
-                {
-                    "certificate": null,
-                    "lessonQuizs": [],
-                    "completed": false,
-                    "courseId": "C7102"
-                }
-            ],
-            "role": "Student",
-            "userId": "6209",
-            "EnrolledCourses": [
-                "C3981",
-                "C3221",
-                "C7102"
-            ],
-            "email": "yasmin@gmail.com",
-            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-            "username": "yazo"
-        }
-    ],
+            },
+            {
+                "certificate": null,
+                "lessonQuizs": [],
+                "completed": false,
+                "courseId": "C3099"
+            }
+        ],
+        "role": "Student",
+        "userId": "4522",
+        "EnrolledCourses": [
+            "C3981",
+            "C3099"
+        ],
+        "email": "f1@gmail.com",
+        "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+        "username": "farah"
+    }],
     "Admins": [{
         "role": "Admin",
         "userId": "1234",

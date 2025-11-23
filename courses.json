@@ -1,9 +1,6 @@
 {"Courses": [
     {
-        "StudentIDs": [
-            "4522",
-            "6209"
-        ],
+        "StudentIDs": ["4522"],
         "description": "math1",
         "title": "math",
         "courseId": "C3981",
@@ -128,32 +125,23 @@
                 "courseId": "C3981",
                 "opResources": [],
                 "content": "lesson2 content"
+            },
+            {
+                "questions": [],
+                "lessonId": "L6017",
+                "title": "lesson 3",
+                "courseId": "C3981",
+                "opResources": [],
+                "content": "lesson 3 content "
             }
         ]
     },
     {
-        "StudentIDs": ["6209"],
-        "description": "hhhh",
-        "title": "new",
-        "courseId": "C3221",
-        "instructorId": "3926",
-        "isCompleted": false,
-        "status": "APPROVED",
-        "lessons": [{
-            "questions": [],
-            "lessonId": "L8135",
-            "title": "l1",
-            "courseId": "C3221",
-            "opResources": [],
-            "content": "few"
-        }]
-    },
-    {
-        "StudentIDs": ["6209"],
-        "description": "kjoj",
-        "title": "hi",
-        "courseId": "C7102",
-        "instructorId": "3926",
+        "StudentIDs": ["4522"],
+        "description": "phy2",
+        "title": "phy",
+        "courseId": "C3099",
+        "instructorId": "2870",
         "isCompleted": false,
         "status": "APPROVED",
         "lessons": []
