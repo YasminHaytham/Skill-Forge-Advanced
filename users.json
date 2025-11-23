@@ -35,11 +35,15 @@
         {
             "Progress": [
                 {
+                    "certificate": null,
                     "lessonQuizs": [],
+                    "completed": false,
                     "courseId": "C7650"
                 },
                 {
+                    "certificate": null,
                     "lessonQuizs": [],
+                    "completed": false,
                     "courseId": "C3349"
                 }
             ],
@@ -56,19 +60,80 @@
         {
             "Progress": [
                 {
+                    "certificate": null,
                     "lessonQuizs": [{
                         "quiz": null,
                         "lessonId": "L3362",
                         "completed": false
                     }],
+                    "completed": false,
                     "courseId": "C2899"
                 },
                 {
+                    "certificate": null,
                     "lessonQuizs": [{
-                        "quiz": null,
+                        "quiz": {
+                            "studentScores": [],
+                            "studentAttempts": 0,
+                            "questions": [
+                                {
+                                    "options": [
+                                        "a",
+                                        "saass",
+                                        "add",
+                                        "dasd"
+                                    ],
+                                    "correctAnswer": "a",
+                                    "questionText": "Enter question 1 here"
+                                },
+                                {
+                                    "options": [
+                                        "SA",
+                                        "SD",
+                                        "SFSF",
+                                        "GFG"
+                                    ],
+                                    "correctAnswer": "SA",
+                                    "questionText": "Enter question 2 here"
+                                },
+                                {
+                                    "options": [
+                                        "DF",
+                                        "DF",
+                                        "HGF",
+                                        "HGF"
+                                    ],
+                                    "correctAnswer": "DF",
+                                    "questionText": "Enter question 3 here"
+                                },
+                                {
+                                    "options": [
+                                        "GFG",
+                                        "GDF",
+                                        "GR",
+                                        "NB"
+                                    ],
+                                    "correctAnswer": "GFG",
+                                    "questionText": "Enter question 4 here"
+                                },
+                                {
+                                    "options": [
+                                        "YTH",
+                                        "TEE",
+                                        "TR",
+                                        "T"
+                                    ],
+                                    "correctAnswer": "YTH",
+                                    "questionText": "Enter question 5 here"
+                                }
+                            ],
+                            "QuizId": "Q7417_L0443",
+                            "passed": false
+                        },
                         "lessonId": "L0443",
                         "completed": false
                     }],
+                    "completed": false,
                     "courseId": "C2539"
                 }
             ],
@@ -83,14 +148,11 @@
             "username": "ya"
         }
     ],
-    "Admins":[
-        {
-            "role": "Admin",
-            "userId": "1234",
-            "email": "ad@gmail.com",
-            "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
-            "username": "Admin1234"
-        }
-    ]
-          }
-   
+    "Admins": [{
+        "role": "Admin",
+        "userId": "1234",
+        "email": "ad@gmail.com",
+        "passwordHash": "3b0bbbb98aa865230f2d6979835302ca0bfbe94463489b1f28e81145d1d505fa",
+        "username": "Admin1234"
+    }]
+}

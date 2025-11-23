@@ -24,6 +24,7 @@ public class Quiz {
         this.score = 0;
         this.studentAttempts = 0;
         this.passed = false;
+        this.studentScores = new ArrayList<>();
     }
       public Quiz(String quizId, List<Question> questions, List<Integer> studentScores, int studentAttempts,
             boolean passed) {
