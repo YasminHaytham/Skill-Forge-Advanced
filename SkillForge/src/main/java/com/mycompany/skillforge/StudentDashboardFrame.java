@@ -321,7 +321,22 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_LessonFrameBtnActionPerformed
 
     private void ViewCertificateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCertificateBtnActionPerformed
-
+        int selected = EnrolledCoursesList.getSelectedIndex();
+        if (selected != -1) {
+            Course selectedCourse = Student.getEnrolledCourseObjects().get(selected);
+            if (Student.hasCertificate(selectedCourse))
+            {
+                this.dispose();
+                ViewCertificateFrame certificateFrame= new ViewCertificateFrame(selectedCourse);
+                certificateFrame.setVisible(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "No Certificate Avaliable as course is not completed");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please select a course first");
+        }
     }//GEN-LAST:event_ViewCertificateBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {
