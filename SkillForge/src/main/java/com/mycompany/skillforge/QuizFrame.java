@@ -21,7 +21,7 @@ public class QuizFrame extends javax.swing.JFrame {
     Quiz quiz;
     Student student;
     private JScrollPane scrollPane;
-    JsonDatabaseManager dbManager = new JsonDatabaseManager();
+     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
 
     public QuizFrame(Lesson lesson) {
         this.lesson = lesson;
