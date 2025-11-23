@@ -101,7 +101,18 @@ public class JsonDatabaseManager {
         }
         return courses;
     }
-
+     public Course getCourseById (String courseId)
+    {
+        List <Course> courses = getAllCourses();
+        for ( Course c : courses)
+        {
+            if ( c.getCourseId().equals(courseId))
+            {
+                return c;
+            }
+        }
+        return null;
+    }
     public Course getApprovedCourseById (String courseId)
     {
         List <Course> courses = getAllApprovedCourses();
@@ -328,4 +339,5 @@ public class JsonDatabaseManager {
         }
         return null;
     }
+
 }
