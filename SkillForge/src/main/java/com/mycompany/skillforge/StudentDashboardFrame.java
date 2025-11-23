@@ -334,7 +334,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         }
     }
 
-    private void EnrollBtnActionPerformed(java.awt.event.ActionEvent evt) {
+  private void EnrollBtnActionPerformed(java.awt.event.ActionEvent evt) {
     int confirm = JOptionPane.showConfirmDialog(this,
             "Are you sure you want to Enroll in Course?",
             "Confirm Enroll",
@@ -367,8 +367,8 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
-        }
-    }
+}
+}
 }
 
     private void BrowseBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BrowseBtnActionPerformed
@@ -472,10 +472,10 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         jScrollPane2.repaint();
     }
 
-    private void LoadAvailableCoursesToList() {
+ private void LoadAvailableCoursesToList() {
     DefaultListModel<String> model = new DefaultListModel<>();
-   
     List<String> enrolledCourseIds = Student.getEnrolledCourses();
+    availableCourses = new JsonDatabaseManager().getAllApprovedCourses();
     
     for (Course course : availableCourses) {
         boolean isEnrolled = enrolledCourseIds.contains(course.getCourseId());
@@ -489,9 +489,8 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     AvailableCoursesList.revalidate();
     AvailableCoursesList.repaint();
     jScrollPane2.revalidate();
-        jScrollPane2.repaint();
+    jScrollPane2.repaint();
 }
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code

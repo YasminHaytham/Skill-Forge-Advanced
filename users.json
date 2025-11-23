@@ -2,7 +2,8 @@
     "Instructors": [{
         "CreatedCourses": [
             "C3981",
-            "C3099"
+            "C3099",
+            "C5767"
         ],
         "role": "Instructor",
         "userId": "2870",
@@ -157,13 +158,20 @@
                 "lessonQuizs": [],
                 "completed": false,
                 "courseId": "C3099"
+            },
+            {
+                "certificate": null,
+                "lessonQuizs": [],
+                "completed": false,
+                "courseId": "C5767"
             }
         ],
         "role": "Student",
         "userId": "4522",
         "EnrolledCourses": [
             "C3981",
-            "C3099"
+            "C3099",
+            "C5767"
         ],
         "email": "f1@gmail.com",
         "passwordHash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
