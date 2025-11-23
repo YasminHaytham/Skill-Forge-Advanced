@@ -580,27 +580,34 @@ public class QuizFrame extends javax.swing.JFrame {
         CorrectAnswer5.setVisible(true);
         if (quiz.getStudentAttempts() < quiz.getMaxNumberofAttempts()) {
             quiz.incrementAttempts();
+             int score = 0;
 
             if (getSelectedButtonText(buttonGroup1, jRadioButton1, jRadioButton2, jRadioButton3, jRadioButton4)
                     .equals(quiz.getAllQuestions().get(0).getCorrectAnswer())) {
                 quiz.incrementScore();
+                score++;
             }
             if (getSelectedButtonText(buttonGroup2, jRadioButton5, jRadioButton6, jRadioButton7, jRadioButton8)
                     .equals(quiz.getAllQuestions().get(1).getCorrectAnswer())) {
                 quiz.incrementScore();
+                score++;
             }
             if (getSelectedButtonText(buttonGroup3, jRadioButton9, jRadioButton10, jRadioButton11, jRadioButton12)
                     .equals(quiz.getAllQuestions().get(2).getCorrectAnswer())) {
                 quiz.incrementScore();
+                score++;
             }
             if (getSelectedButtonText(buttonGroup4, jRadioButton13, jRadioButton14, jRadioButton15, jRadioButton16)
                     .equals(quiz.getAllQuestions().get(3).getCorrectAnswer())) {
                 quiz.incrementScore();
+                score++;
             }
             if (getSelectedButtonText(buttonGroup5, jRadioButton17, jRadioButton18, jRadioButton19, jRadioButton20)
                     .equals(quiz.getAllQuestions().get(4).getCorrectAnswer())) {
                 quiz.incrementScore();
+                score++;
             }
+            quiz.addStudentScore(score);
             if (quiz.isPassed()) {
                 lesson.markAsCompleted(student);
             }
