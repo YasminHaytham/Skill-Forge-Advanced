@@ -137,7 +137,7 @@
         ]
     },
     {
-        "StudentIDs": [],
+        "StudentIDs": ["4522"],
         "description": "phy2",
         "title": "phy",
         "courseId": "C3099",
