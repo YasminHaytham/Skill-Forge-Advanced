@@ -4,6 +4,10 @@
  */
 package com.mycompany.skillforge;
 
+
+
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -11,8 +15,10 @@ import javax.swing.JOptionPane;
  * @author Farah
  */
 public class LessonFrame extends javax.swing.JFrame {
-    Lesson lesson;
-    Student student ;
+    private Lesson lesson;
+   private Student student ;
+   private List<String> resources;
+   private String  optionalResources;
 
     public LessonFrame(Lesson lesson) {
 
@@ -21,6 +27,12 @@ public class LessonFrame extends javax.swing.JFrame {
         }
         this.lesson = lesson;
         student =(Student) Manager.getCurrentUser();
+        resources=lesson.getResources();
+        if (resources.isEmpty()) {
+                        optionalResources = "";
+                    } else {
+                        optionalResources = String.join(", ", resources);
+                    }
         initComponents();
     }
 
@@ -62,7 +74,7 @@ public class LessonFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Optional Resourses");
 
-        OptionalResoursesLabel.setText(lesson.getResources().toString());
+        OptionalResoursesLabel.setText( optionalResources);
 
         GoBackBtn.setText("Go Back");
         GoBackBtn.addActionListener(new java.awt.event.ActionListener() {

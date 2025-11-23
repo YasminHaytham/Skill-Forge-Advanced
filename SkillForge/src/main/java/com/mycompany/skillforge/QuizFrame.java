@@ -21,6 +21,7 @@ public class QuizFrame extends javax.swing.JFrame {
     Quiz quiz;
     Student student;
     private JScrollPane scrollPane;
+     private final JsonDatabaseManager dbManager = new JsonDatabaseManager();
 
     public QuizFrame(Lesson lesson) {
         this.lesson = lesson;
@@ -610,6 +611,10 @@ public class QuizFrame extends javax.swing.JFrame {
             quiz.addStudentScore(score);
             if (quiz.isPassed()) {
                 lesson.markAsCompleted(student);
+            }
+            else 
+            {
+                dbManager.updateStudent(student);
             }
             JOptionPane.showMessageDialog(this,
                     "You scored" + quiz.getScore() + " out of " + quiz.getAllQuestions().size());

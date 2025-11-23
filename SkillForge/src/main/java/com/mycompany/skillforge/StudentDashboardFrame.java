@@ -335,28 +335,41 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     }
 
     private void EnrollBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        int confirm = JOptionPane.showConfirmDialog(this,
-                "Are you sure you want to Enroll in Course?",
-                "Confirm Enroll",
-                JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) {
-            return;
-        } else {
-            int selected = AvailableCoursesList.getSelectedIndex();
-            if (selected != -1) {
-                Course courseToEnroll = availableCourses.get(selected);
+    int confirm = JOptionPane.showConfirmDialog(this,
+            "Are you sure you want to Enroll in Course?",
+            "Confirm Enroll",
+            JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    } else {
+        int selected = AvailableCoursesList.getSelectedIndex();
+        if (selected != -1) {
+            String selectedTitle = AvailableCoursesList.getModel().getElementAt(selected);
+            
+            Course courseToEnroll = null;
+            for (Course course : availableCourses) {
+                if (course.getTitle().equals(selectedTitle)) {
+                    courseToEnroll = course;
+                    break;
+                }
+            }
+            
+            if (courseToEnroll != null) {
                 courseToEnroll.enrollStudent(Student);
                 enrolledCourses = Student.getEnrolledCourseObjects();
+                availableCourses = new JsonDatabaseManager().getAllApprovedCourses();
+                
                 LoadEnrolledCoursesTolist();
                 LoadAvailableCoursesToList();
 
                 JOptionPane.showMessageDialog(this, "Successfully enrolled in course!", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a course to enroll.");
         }
     }
+}
 
     private void BrowseBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BrowseBtnActionPerformed
         BrowseFrame browseFrame = new BrowseFrame();
@@ -460,21 +473,24 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     }
 
     private void LoadAvailableCoursesToList() {
-        DefaultListModel<String> model = new DefaultListModel<>();
-
-        for (Course course : availableCourses) {
-            if (course.isApproved()) {
-                if (!course.isStudentEnrolled(Student)) {
-                    model.addElement(course.getTitle());
-                }
-            }
+    DefaultListModel<String> model = new DefaultListModel<>();
+   
+    List<String> enrolledCourseIds = Student.getEnrolledCourses();
+    
+    for (Course course : availableCourses) {
+        boolean isEnrolled = enrolledCourseIds.contains(course.getCourseId());
+        
+        if (!isEnrolled) {
+            model.addElement(course.getTitle());
         }
-        AvailableCoursesList.setModel(model);
-        AvailableCoursesList.revalidate();
-        AvailableCoursesList.repaint();
-        jScrollPane2.revalidate();
-        jScrollPane2.repaint();
     }
+    
+    AvailableCoursesList.setModel(model);
+    AvailableCoursesList.revalidate();
+    AvailableCoursesList.repaint();
+    jScrollPane2.revalidate();
+        jScrollPane2.repaint();
+}
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
