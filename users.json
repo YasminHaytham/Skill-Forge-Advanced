@@ -80,8 +80,8 @@
                 },
                 {
                     "quiz": {
-                        "studentScores": [],
-                        "studentAttempts": 3,
+                        "studentScores": [5],
+                        "studentAttempts": 1,
                         "questions": [
                             {
                                 "options": [
