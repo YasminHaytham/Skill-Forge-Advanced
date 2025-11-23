@@ -1,6 +1,7 @@
 package com.mycompany.skillforge;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import org.json.JSONObject;
@@ -11,10 +12,11 @@ public class Certificate {
     private String studentId;
     private String courseId;
     private String certificateId;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
     private Random random = new Random();
 
     public Certificate(String studentId, String courseId) {
-        this.certificateId = "Cer" + String.format("%04d", random.nextInt(10000));
+        this.certificateId = "CER" + String.format("%04d", random.nextInt(10000));
         this.studentId = studentId;
         this.courseId = courseId;
         this.issueDate = LocalDate.now();
@@ -24,6 +26,44 @@ public class Certificate {
         this.issueDate = issueDate;
         this.studentId = studentId;
         this.courseId = courseId;
+        this.certificateId = certificateId;
+    }
+    
+
+    public LocalDate getIssueDate() {
+
+        return issueDate;
+    }
+
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
+    public String getFormatedIssueDate()
+    {
+        return issueDate.format(formatter);
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getCertificateId() {
+        return certificateId;
+    }
+
+    public void setCertificateId(String certificateId) {
         this.certificateId = certificateId;
     }
 
