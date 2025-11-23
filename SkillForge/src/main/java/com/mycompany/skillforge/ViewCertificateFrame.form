@@ -59,7 +59,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel6" min="-2" pref="72" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="jLabel8" min="-2" pref="383" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
