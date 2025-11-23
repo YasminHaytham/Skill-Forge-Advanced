@@ -7,7 +7,7 @@
     "title": "math",
     "courseId": "C2539",
     "instructorId": "2940",
-    "isCompleted": false,
+    "isCompleted":true,
     "status": "APPROVED",
     "lessons": [{
         "questions": [

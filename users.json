@@ -152,8 +152,8 @@
                 "certificate": null,
                 "lessonQuizs": [{
                     "quiz": {
-                        "studentScores": [],
-                        "studentAttempts": 0,
+                        "studentScores": [5],
+                        "studentAttempts": 1,
                         "questions": [
                             {
                                 "options": [
@@ -207,12 +207,12 @@
                             }
                         ],
                         "QuizId": "Q8682_L0443",
-                        "passed": false
+                        "passed": true
                     },
                     "lessonId": "L0443",
-                    "completed": false
+                    "completed": true
                 }],
-                "completed": false,
+                "completed": true,
                 "courseId": "C2539"
             }],
             "role": "Student",
