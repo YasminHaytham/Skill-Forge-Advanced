@@ -76,9 +76,9 @@ public class Insructor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        InstructorName.setText("e");
+        InstructorName.setText(instructor.getUsername());
 
-        InstructorId.setText("jLabel7");
+        InstructorId.setText(instructor.getUserId());
 
         jLabel1.setText("Created Courses");
 
