@@ -19,7 +19,7 @@
                 {
                     "quiz": {
                         "studentScores": [],
-                        "studentAttempts": 3,
+                        "studentAttempts": 0,
                         "questions": [
                             {
                                 "options": [
@@ -73,10 +73,10 @@
                             }
                         ],
                         "QuizId": "Q5744_L0471",
-                        "passed": true
+                        "passed": false
                     },
                     "lessonId": "L0471",
-                    "completed": true
+                    "completed": false
                 },
                 {
                     "quiz": {
