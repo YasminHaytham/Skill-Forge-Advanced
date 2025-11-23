@@ -152,6 +152,7 @@ public class Course {
 
     public void markAsCompleted() {
         this.isCompleted = true;
+        dbManager.updateCourse(this);
     }
 // Methods to manage students
 // adding and removing students from the course

@@ -61,12 +61,8 @@
                                   <Component id="InstructorId" min="-2" pref="89" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" pref="122" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="545" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="RemoveCourseBtn" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CreateNewCourseBtn" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ViewApprovalStatusBtn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace pref="507" max="32767" attributes="0"/>
+                              <Component id="CompleteBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
@@ -90,22 +86,34 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="AddLessonBtn" min="-2" max="-2" attributes="0"/>
-                                  <Component id="EnrolledStudentBtn" min="-2" max="-2" attributes="0"/>
                                   <Component id="RemoveLessonBtn" min="-2" max="-2" attributes="0"/>
                                   <Component id="SaveBtn" min="-2" max="-2" attributes="0"/>
                                   <Component id="AddQuizBtn" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="InsightsBtn" min="-2" max="-2" attributes="0"/>
-                                          <Component id="ViewLessonsBtn" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CourseSaveBtn1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="EnrolledStudentBtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="InsightsBtn" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="ViewLessonsBtn" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="CourseSaveBtn1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="CreateNewCourseBtn" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="ViewApprovalStatusBtn" min="-2" max="-2" attributes="0"/>
+                                              <Component id="RemoveCourseBtn" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="81" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -142,7 +150,10 @@
                           <Component id="ViewApprovalStatusBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="CourseSaveBtn1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CourseSaveBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CompleteBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -377,6 +388,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddQuizBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="CompleteBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mark course as completed"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CompleteBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

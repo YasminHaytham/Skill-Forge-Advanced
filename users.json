@@ -1,6 +1,9 @@
 {
     "Instructors": [{
-        "CreatedCourses": ["C3981"],
+        "CreatedCourses": [
+            "C3981",
+            "C3099"
+        ],
         "role": "Instructor",
         "userId": "2870",
         "email": "f@gmail.com",
@@ -18,8 +21,12 @@
             "lessonQuizs": [
                 {
                     "quiz": {
-                        "studentScores": [],
-                        "studentAttempts": 0,
+                        "studentScores": [
+                            0,
+                            5,
+                            0
+                        ],
+                        "studentAttempts": 3,
                         "questions": [
                             {
                                 "options": [
@@ -73,10 +80,10 @@
                             }
                         ],
                         "QuizId": "Q5744_L0471",
-                        "passed": false
+                        "passed": true
                     },
                     "lessonId": "L0471",
-                    "completed": false
+                    "completed": true
                 },
                 {
                     "quiz": {

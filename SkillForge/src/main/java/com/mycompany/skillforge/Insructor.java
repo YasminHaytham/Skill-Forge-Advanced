@@ -60,6 +60,7 @@ public class Insructor extends javax.swing.JFrame {
         InsightsBtn = new javax.swing.JButton();
         ViewApprovalStatusBtn = new javax.swing.JButton();
         AddQuizBtn = new javax.swing.JButton();
+        CompleteBtn = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,7 +79,7 @@ public class Insructor extends javax.swing.JFrame {
 
         InstructorName.setText(instructor.getUsername());
 
-        InstructorId.setText(instructor.getUserId());
+        InstructorId.setText("Instructor ID: " + instructor.getUserId());
 
         jLabel1.setText("Created Courses");
 
@@ -227,6 +228,13 @@ public class Insructor extends javax.swing.JFrame {
             }
         });
 
+        CompleteBtn.setText("Mark course as completed");
+        CompleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,11 +252,8 @@ public class Insructor extends javax.swing.JFrame {
                                     .addComponent(InstructorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(InstructorId, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 545, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(RemoveCourseBtn)
-                                    .addComponent(CreateNewCourseBtn)
-                                    .addComponent(ViewApprovalStatusBtn))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 507, Short.MAX_VALUE)
+                                .addComponent(CompleteBtn)))
                         .addGap(61, 61, 61))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,17 +270,25 @@ public class Insructor extends javax.swing.JFrame {
                                         .addGap(37, 37, 37)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(AddLessonBtn)
-                                    .addComponent(EnrolledStudentBtn)
                                     .addComponent(RemoveLessonBtn)
                                     .addComponent(SaveBtn)
                                     .addComponent(AddQuizBtn)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(InsightsBtn)
-                                            .addComponent(ViewLessonsBtn)
-                                            .addComponent(CourseSaveBtn1))))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(EnrolledStudentBtn)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(13, 13, 13)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(InsightsBtn)
+                                                    .addComponent(ViewLessonsBtn)
+                                                    .addComponent(CourseSaveBtn1))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CreateNewCourseBtn)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(ViewApprovalStatusBtn)
+                                                .addComponent(RemoveCourseBtn)))))))
+                        .addContainerGap(81, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +317,9 @@ public class Insructor extends javax.swing.JFrame {
                             .addComponent(InsightsBtn)
                             .addComponent(ViewApprovalStatusBtn))
                         .addGap(40, 40, 40)
-                        .addComponent(CourseSaveBtn1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CourseSaveBtn1)
+                            .addComponent(CompleteBtn))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -619,6 +634,17 @@ public class Insructor extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_AddQuizBtnActionPerformed
 
+    private void CompleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteBtnActionPerformed
+        int selectedRow = CourseTable.getSelectedRow();
+        if (selectedRow >= 0 && createdCourses != null) {
+            Course selectedCourse = createdCourses.get(selectedRow);
+            selectedCourse.markAsCompleted();
+            JOptionPane.showMessageDialog(this, "Course marked as completed.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a course first.");
+        }
+    }//GEN-LAST:event_CompleteBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -657,6 +683,7 @@ public class Insructor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddLessonBtn;
     private javax.swing.JButton AddQuizBtn;
+    private javax.swing.JButton CompleteBtn;
     private javax.swing.JButton CourseSaveBtn1;
     private javax.swing.JTable CourseTable;
     private javax.swing.JButton CreateNewCourseBtn;
